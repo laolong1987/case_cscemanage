@@ -263,7 +263,7 @@ public class POJOUtil {
 		String url="jdbc:mysql://115.28.133.104:3306/medical"; //数据库连接地址
 		String username="root"; //数据库登录名
 		String pwd="Muuu2015";//数据库密码
-		String tablename="demo"; //表名
+		String tablename="user"; //表名
 		String file="C:\\data.java";  //输出文件
 
 
