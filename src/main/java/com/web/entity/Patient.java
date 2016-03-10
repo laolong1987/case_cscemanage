@@ -30,14 +30,74 @@ public class Patient{
     private Date createtime;
     @Column(name ="updatetime")
     private Date updatetime;
-    @Column(name ="phone")
-    private String phone;
+    @Column(name ="phone1")
+    private String phone1;
     @Column(name ="sex")
     private int sex;
     @Column(name ="address")
     private String address;
     @Column(name ="email")
     private String email;
+
+    @Column(name ="phone2")
+    private String phone2;
+    @Column(name ="province")
+    private int province;
+    @Column(name ="city")
+    private int city;
+    @Column(name ="fax")
+    private String fax;
+    @Column(name ="zipcode")
+    private String zipcode;
+
+    public String getPhone1() {
+        return phone1;
+    }
+
+    public void setPhone1(String phone1) {
+        this.phone1 = phone1;
+    }
+
+    public String getPhone2() {
+        return phone2;
+    }
+
+    public void setPhone2(String phone2) {
+        this.phone2 = phone2;
+    }
+
+    public int getProvince() {
+        return province;
+    }
+
+    public void setProvince(int province) {
+        this.province = province;
+    }
+
+    public int getCity() {
+        return city;
+    }
+
+    public void setCity(int city) {
+        this.city = city;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
     public void setId(int id){
         this.id=id;
     }
@@ -78,13 +138,6 @@ public class Patient{
     }
     public Date getUpdatetime(){
         return this.updatetime;
-    }
-
-    public void setPhone(String phone){
-        this.phone=phone;
-    }
-    public String getPhone(){
-        return this.phone;
     }
 
     public void setSex(int sex){

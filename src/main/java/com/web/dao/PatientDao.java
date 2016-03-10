@@ -29,6 +29,14 @@ public class PatientDao extends BaseDao{
         StringBuffer sql =new StringBuffer();
         sql.append("select * from patient where 1=1");
         Map p=new HashMap();
+        if (map.containsKey("queryname")){
+            sql.append(" and name like :queryname");
+            p.put("queryname", "%" + map.get("queryname") + "%");
+        }
+        if (map.containsKey("queryphone1")){
+            sql.append(" and phone1 like :queryphone1");
+            p.put("queryphone1", "%" + map.get("queryphone1") + "%");
+        }
         return super.search(sql.toString(),p);
     }
 }

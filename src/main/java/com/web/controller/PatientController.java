@@ -51,7 +51,7 @@ public class PatientController {
         String username=ConvertUtil.safeToString(request.getParameter("username"),"");
         String email=ConvertUtil.safeToString(request.getParameter("email"),"");
         String address=ConvertUtil.safeToString(request.getParameter("address"),"");
-        String phone=ConvertUtil.safeToString(request.getParameter("phone"),"");
+        String phone=ConvertUtil.safeToString(request.getParameter("phone1"),"");
         int sex=ConvertUtil.safeToInteger(request.getParameter("sex"),0);
 
         Patient patient=new Patient();
@@ -67,7 +67,7 @@ public class PatientController {
         patient.setAddress(address);
         patient.setSex(sex);
         patient.setPwd("123456");
-        patient.setPhone(phone);
+        patient.setPhone1(phone);
         patientService.savePartent(patient);
         return "success";
     }

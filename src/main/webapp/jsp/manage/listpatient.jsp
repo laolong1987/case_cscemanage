@@ -59,7 +59,7 @@
                     },
                 },
                 {	display : "手机号",
-                    name : "phone",
+                    name : "phone1",
                     newline : true,
                     type : "text",
                     validate : {
@@ -116,7 +116,7 @@
                     minWidth : 60
                 }, {
                     display : '手机号',
-                    name : 'phone',
+                    name : 'phone1',
                     width : 100,
                     minWidth : 30,
                     align : 'center'
@@ -141,19 +141,14 @@
                 {
                     display : '地址',
                     name : 'address',
-                    minWidth : 100,
                     align : 'left'
                 },
                 {
                     display : '邮箱',
                     name : 'email',
-                    minWidth : 100,
                     align : 'left'
                 }
             ],
-            width : '99%',
-            height : '100%',
-            heightDiff : -10,
             pageSize : 15,
             url : "${ctx}/patient/searchlist",
             rownumbers : true,
@@ -186,7 +181,7 @@
             patientid: data.id,
             name: data.name,
             username : data.username,
-            phone : data.phone,
+            phone1 : data.phone1,
             email : data.email,
             address : data.address,
             sex : data.sex
@@ -309,16 +304,14 @@
 <body style="padding: 5px;">
 <div class="l-loading" style="display:block" id="pageloading"></div>
 <form id="queryForm">
-    <input type="hidden" id="service" name="service"
-           value="SettingServiceImpl" />
     <div class="l-panel-search">
-        <div class="l-panel-search-item">Module</div>
+        <div class="l-panel-search-item">姓名</div>
         <div class="l-panel-search-item">
-            <input type="text" id="queryModule" name="queryModule"  class="liger-textbox" />
+            <input type="text" id="queryname" name="queryname"  class="liger-textbox" />
         </div>
-        <div class="l-panel-search-item">Name</div>
+        <div class="l-panel-search-item">手机号</div>
         <div class="l-panel-search-item">
-            <input type="text" id="queryName" name="queryName"  class="liger-textbox" />
+            <input type="text" id="queryphone1" name="queryphone1"  class="liger-textbox" />
         </div>
         <div class="l-panel-search-item">
             <input type="button" id="searchbtn" value="查询" />
