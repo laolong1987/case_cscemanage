@@ -26,7 +26,12 @@ public abstract class BaseDao {
 	 * 保存或者更新实体
 	 */
 	public void save(Object entry){
-		sessionFactory.getCurrentSession().saveOrUpdate(entry);
+		Session session = sessionFactory.openSession();
+		Transaction ts = session.beginTransaction();
+		session.saveOrUpdate(entry);
+		ts.commit();
+		session.close();
+		//sessionFactory.getCurrentSession().saveOrUpdate(entry);
 	}
 	
 	/**

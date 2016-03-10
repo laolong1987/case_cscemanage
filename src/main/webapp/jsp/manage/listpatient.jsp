@@ -28,11 +28,11 @@
         });
 
         setGrid();
-        //initSaveForm('text');
+        initSaveForm();
 
         $("#pageloading").hide();
     });
-    function initSaveForm(inputType){
+    function initSaveForm(){
         saveForm = $("#saveForm").ligerForm({
             inputWidth : 170,
             labelWidth : 100,
@@ -40,7 +40,8 @@
             validate : true,
             fields : [
                 {name : "patientid", type : "hidden"},
-                {display : "登录名", name : "username", type : "text", group : "编辑", groupicon : icon,				validate : {
+                {display : "登录名", name : "username", type : "text", group : "编辑", groupicon : icon,
+                    validate : {
                     required : true,
                     maxlength : 20
                 }},
@@ -52,17 +53,15 @@
                 },{	display : "性别",
                     name : "sex",
                     newline : true,
-                    type : inputType,
-                    type : "html",
-                    htmlattr : "checked",
-                    html : '<input id="sta" type="radio" name="sta" checked="checked" value="1"/>' +
-                    '<label for="CheckBoxList1_0">男</label>&nbsp;<input id="sta" type="radio" name="sta" value="2"/>' +
-                    '<label for="CheckBoxList1_0">女</label>&nbsp;'
+                    type : "radiolist",
+                    editor : {
+                        data : [{"text":"男","id":0},{"text":"女","id":1}]
+                    },
                 },
                 {	display : "手机号",
                     name : "phone",
                     newline : true,
-                    type : inputType,
+                    type : "text",
                     validate : {
                         required : true,
                         maxlength : 11
@@ -112,35 +111,44 @@
                 },{
                     display : '登录名',
                     name : 'username',
-                    align : 'left',
-                    width : 200,
+                    align : 'center',
+                    width : 150,
                     minWidth : 60
                 }, {
                     display : '手机号',
                     name : 'phone',
-                    width : 300,
+                    width : 100,
                     minWidth : 30,
-                    align : 'left'
+                    align : 'center'
                 }, {
                     display : '性别',
                     name : 'sex',
-                    minWidth : 100,
-                    align : 'left',
-                    width : 300
+                    minWidth : 10,
+                    align : 'center',
+                    width : 50,
+                    render : function(rowdata, rowindex, value) {
+                        if(rowdata.sex==0){
+                            return "男"
+                        }else if(rowdata.sex==1){
+                            return "女";
+                        }else{
+                            return ""
+                        }
+
+                    }
+
                 },
                 {
                     display : '地址',
                     name : 'address',
                     minWidth : 100,
-                    align : 'left',
-                    width : 300
+                    align : 'left'
                 },
                 {
                     display : '邮箱',
                     name : 'email',
                     minWidth : 100,
-                    align : 'left',
-                    width : 300
+                    align : 'left'
                 }
             ],
             width : '99%',
@@ -170,19 +178,18 @@
 
     function editColumn(data){
         var inputType = 'text';
-        if(data.name != undefined && data.name != null && data.name.indexOf('PASSWORD') >= 0){
-            inputType = 'password';
-        }
 
-        initSaveForm(inputType);
+      //  initSaveForm();
         showWindow();
 
         saveForm.setData({
-            settingid: data.id,
+            patientid: data.id,
             name: data.name,
-            module : data.module,
-            value : data.value,
-            brief : data.brief,
+            username : data.username,
+            phone : data.phone,
+            email : data.email,
+            address : data.address,
+            sex : data.sex
         });
 
     }
@@ -253,7 +260,7 @@
     function removeData(data) {
         $.ajax({
             type : "POST",
-            url : "${ctx}/common/removeSetting",
+            url : "remove",
             data : JSON.stringify(data),
             contentType : "application/json; charset=utf-8",
             dataType : "text",
@@ -278,9 +285,9 @@
             $.ajax({
                 type : "POST",
                 url : "savepatient",
-                data : JSON.stringify(params),
-                contentType : "application/json;charset=utf-8",
-                dataType : "text",
+//                data : JSON.stringify(params),
+                data : params,
+                 dataType : "text",
                 success : function(result) {
                     if (result == 'success') {
                         search();

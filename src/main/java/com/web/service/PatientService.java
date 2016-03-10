@@ -32,22 +32,18 @@ public class PatientService {
         return patientDao.searchPatient(map);
     }
 
-    public void savePartent(Map map){
-        Patient patient=new Patient();
-        String id= StringUtil.safeToString("patientid","");
-        if(!"".equals(id)){
-            patient = (Patient) patientDao.getObjectById(Integer.parseInt(id),Patient.class);
-            patient.setUpdatetime(new Date());
-        }else{
-            patient.setCreatetime(new Date());
-        }
-        patient.setName(StringUtil.safeToString("name",""));
-        patient.setUsername(StringUtil.safeToString("name",""));
-        patient.setEmail(StringUtil.safeToString("name",""));
-        patient.setAddress(StringUtil.safeToString("name",""));
-        patient.setSex(Integer.valueOf(StringUtil.safeToString("name","0")));
-        patient.setPwd("123456");
-        patient.setPhone(StringUtil.safeToString("phone",""));
+    public void savePartent(Patient patient){
+
         patientDao.save(patient);
     }
+
+    public Patient getPatientById(int id){
+        return (Patient) patientDao.getObjectById(id,Patient.class);
+    }
+
+    public void removePatient(List<Integer> ids) {
+        StringBuffer sql = new StringBuffer("delete from Patient where id in(:ids)");
+        patientDao.removeByIds(sql.toString(), ids);
+    }
+
 }

@@ -1,7 +1,9 @@
 package com.web.controller;
 
+import com.utils.ConvertUtil;
 import com.utils.StringUtil;
 import com.web.entity.Demo;
+import com.web.entity.Patient;
 import com.web.service.DemoService;
 import com.web.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by gaoyang on 16/2/28.
@@ -40,20 +41,46 @@ public class PatientController {
     }
 
 
+
     @RequestMapping(value = "/savepatient",method = RequestMethod.POST)
     @ResponseBody
-    public String savepatient(@RequestBody Map<String, String> param) {
-//        patientService.savePartent(param);
-        System.out.println(222222222);
+    public String savepatient(HttpServletRequest request,
+                              HttpServletResponse response) {
+        int patientid= ConvertUtil.safeToInteger(request.getParameter("patientid"),0);
+        String name=ConvertUtil.safeToString(request.getParameter("name"),"");
+        String username=ConvertUtil.safeToString(request.getParameter("username"),"");
+        String email=ConvertUtil.safeToString(request.getParameter("email"),"");
+        String address=ConvertUtil.safeToString(request.getParameter("address"),"");
+        String phone=ConvertUtil.safeToString(request.getParameter("phone"),"");
+        int sex=ConvertUtil.safeToInteger(request.getParameter("sex"),0);
+
+        Patient patient=new Patient();
+        if(0!=patientid){
+            patient = (Patient) patientService.getPatientById(patientid);
+            patient.setUpdatetime(new Date());
+        }else{
+            patient.setCreatetime(new Date());
+        }
+        patient.setName(name);
+        patient.setUsername(username);
+        patient.setEmail(email);
+        patient.setAddress(address);
+        patient.setSex(sex);
+        patient.setPwd("123456");
+        patient.setPhone(phone);
+        patientService.savePartent(patient);
         return "success";
     }
-//    @RequestMapping(value = "/savepatient",method = RequestMethod.POST)
-//    @ResponseBody
-//    public String savepatient(HttpServletRequest request,
-//                              HttpServletResponse response) {
-////        patientService.savePartent(param);
-//        System.out.println(1111111);
-//        return "success";
-//    }
+
+    @RequestMapping(value = "/remove",method = RequestMethod.POST)
+    @ResponseBody
+    public Object removeEnum(@RequestBody List<Map> params){
+        List<Integer> ids = new ArrayList<Integer>();
+        for (Map map : params) {
+            ids.add(Integer.parseInt(map.get("id").toString()));
+        }
+        patientService.removePatient(ids);
+        return "success";
+    }
 
 }
