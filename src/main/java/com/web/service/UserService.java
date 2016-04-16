@@ -41,7 +41,7 @@ public class UserService {
           userDao.removeByIds(sql.toString(), ids);
       }
 
-    public User getPatientById(int id){
+    public User getUserById(int id){
            return (User) userDao.getObjectById(id,User.class);
        }
 
