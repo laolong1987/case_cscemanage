@@ -3,6 +3,7 @@ package com.web.entity;
 /**
  * Created by gaoyang on 16/3/26.
  */
+
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,223 +16,260 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "casemanage")
 public class CaseManage {
-@Id
-@Basic(optional = false)
-@Column(name = "id")
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
-@Column(name ="name")
-private String name;
-@Column(name ="birthday")
-private Date birthday;
-@Column(name ="createname")
-private String createname;
-@Column(name ="createtime")
-private Date createtime;
-@Column(name ="updatetime")
-private Date updatetime;
-@Column(name ="phone1")
-private String phone1;
-@Column(name ="sex")
-private int sex;
-@Column(name ="address")
-private String address;
-@Column(name ="email")
-private String email;
-@Column(name ="relation")
-private String relation;
-@Column(name ="city")
-private String city;
-@Column(name ="country")
-private String country;
-@Column(name ="street")
-private int street;
-@Column(name ="zipcode")
-private String zipcode;
-@Column(name ="phone2")
-private String phone2;
-@Column(name ="fax")
-private String fax;
-@Column(name ="phonetime")
-private String phonetime;
-@Column(name ="remark")
-private String remark;
-@Column(name ="createempid")
-private int createempid;
-@Column(name ="updateempid")
-private int updateempid;
-@Column(name ="userid")
-private int userid;
-@Column(name ="file")
-private String file;
-        @Column(name ="status")
-        private int status;
-public void setId(int id){
-        this.id=id;
-        }
-public int getId(){
-        return this.id;
-        }
 
-public void setName(String name){
-        this.name=name;
-        }
-public String getName(){
-        return this.name;
-        }
+    @Id
+    @Basic(optional = false)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "birthday")
+    private Date birthday;
+    @Column(name = "createname")
+    private String createname;
+    @Column(name = "createtime")
+    private Date createtime;
+    @Column(name = "updatetime")
+    private Date updatetime;
+    @Column(name = "phone1")
+    private String phone1;
+    @Column(name = "sex")
+    private int sex;
+    @Column(name = "address")
+    private String address;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "relation")
+    private String relation;
+    @Column(name = "city")
+    private String city;
+    @Column(name = "country")
+    private String country;
+    @Column(name = "street")
+    private int street;
+    @Column(name = "zipcode")
+    private String zipcode;
+    @Column(name = "phone2")
+    private String phone2;
+    @Column(name = "fax")
+    private String fax;
+    @Column(name = "phonetime")
+    private String phonetime;
+    @Column(name = "remark")
+    private String remark;
+    @Column(name = "createempid")
+    private int createempid;
+    @Column(name = "updateempid")
+    private int updateempid;
+    @Column(name = "userid")
+    private int userid;
+    @Column(name = "file")
+    private String file;
+    @Column(name = "type")
+    private int type;
+    @Column(name = "status")
+    private int status;
 
-public void setBirthday(Date birthday){
-        this.birthday=birthday;
-        }
-public Date getBirthday(){
-        return this.birthday;
-        }
 
-public void setCreatename(String createname){
-        this.createname=createname;
-        }
-public String getCreatename(){
-        return this.createname;
-        }
+    public String getEmail() {
+        return email;
+    }
 
-public void setCreatetime(Date createtime){
-        this.createtime=createtime;
-        }
-public Date getCreatetime(){
-        return this.createtime;
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-public void setUpdatetime(Date updatetime){
-        this.updatetime=updatetime;
-        }
-public Date getUpdatetime(){
-        return this.updatetime;
-        }
+    public int getId() {
+        return id;
+    }
 
-public void setPhone1(String phone1){
-        this.phone1=phone1;
-        }
-public String getPhone1(){
-        return this.phone1;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-public void setSex(int sex){
-        this.sex=sex;
-        }
-public int getSex(){
-        return this.sex;
-        }
+    public String getName() {
+        return name;
+    }
 
-public void setAddress(String address){
-        this.address=address;
-        }
-public String getAddress(){
-        return this.address;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-public void setEmail(String email){
-        this.email=email;
-        }
-public String getEmail(){
-        return this.email;
-        }
+    public Date getBirthday() {
+        return birthday;
+    }
 
-public void setRelation(String relation){
-        this.relation=relation;
-        }
-public String getRelation(){
-        return this.relation;
-        }
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
-public void setCity(String city){
-        this.city=city;
-        }
-public String getCity(){
-        return this.city;
-        }
+    public String getCreatename() {
+        return createname;
+    }
 
-public void setCountry(String country){
-        this.country=country;
-        }
-public String getCountry(){
-        return this.country;
-        }
+    public void setCreatename(String createname) {
+        this.createname = createname;
+    }
 
-public void setStreet(int street){
-        this.street=street;
-        }
-public int getStreet(){
-        return this.street;
-        }
+    public Date getCreatetime() {
+        return createtime;
+    }
 
-public void setZipcode(String zipcode){
-        this.zipcode=zipcode;
-        }
-public String getZipcode(){
-        return this.zipcode;
-        }
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
 
-public void setPhone2(String phone2){
-        this.phone2=phone2;
-        }
-public String getPhone2(){
-        return this.phone2;
-        }
+    public Date getUpdatetime() {
+        return updatetime;
+    }
 
-public void setFax(String fax){
-        this.fax=fax;
-        }
-public String getFax(){
-        return this.fax;
-        }
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime = updatetime;
+    }
 
-public void setPhonetime(String phonetime){
-        this.phonetime=phonetime;
-        }
-public String getPhonetime(){
-        return this.phonetime;
-        }
+    public String getPhone1() {
+        return phone1;
+    }
 
-public void setRemark(String remark){
-        this.remark=remark;
-        }
-public String getRemark(){
-        return this.remark;
-        }
+    public void setPhone1(String phone1) {
+        this.phone1 = phone1;
+    }
 
-public void setCreateempid(int createempid){
-        this.createempid=createempid;
-        }
-public int getCreateempid(){
-        return this.createempid;
-        }
+    public int getSex() {
+        return sex;
+    }
 
-public void setUpdateempid(int updateempid){
-        this.updateempid=updateempid;
-        }
-public int getUpdateempid(){
-        return this.updateempid;
-        }
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
 
-public void setUserid(int userid){
-        this.userid=userid;
-        }
-public int getUserid(){
-        return this.userid;
-        }
+    public String getAddress() {
+        return address;
+    }
 
-public void setFile(String file){
-        this.file=file;
-        }
-public String getFile(){
-        return this.file;
-        }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-        public int getStatus() {
-                return status;
-        }
+    public String getRelation() {
+        return relation;
+    }
 
-        public void setStatus(int status) {
-                this.status = status;
-        }
+    public void setRelation(String relation) {
+        this.relation = relation;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public int getStreet() {
+        return street;
+    }
+
+    public void setStreet(int street) {
+        this.street = street;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public String getPhone2() {
+        return phone2;
+    }
+
+    public void setPhone2(String phone2) {
+        this.phone2 = phone2;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
+    public String getPhonetime() {
+        return phonetime;
+    }
+
+    public void setPhonetime(String phonetime) {
+        this.phonetime = phonetime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public int getCreateempid() {
+        return createempid;
+    }
+
+    public void setCreateempid(int createempid) {
+        this.createempid = createempid;
+    }
+
+    public int getUpdateempid() {
+        return updateempid;
+    }
+
+    public void setUpdateempid(int updateempid) {
+        this.updateempid = updateempid;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }
+

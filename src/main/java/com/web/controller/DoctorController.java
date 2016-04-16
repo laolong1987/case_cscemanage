@@ -5,7 +5,10 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.utils.ConvertUtil;
+import com.utils.MD5Util;
 import com.web.entity.Patient;
 import com.web.entity.User;
 import com.web.service.UserService;
@@ -23,6 +26,16 @@ public class DoctorController {
 
     @RequestMapping(value = "/showlist")
     public String showlist(HttpServletRequest request, HttpServletResponse response) {
+        User admin = (User) request.getSession().getAttribute("user");
+        String role = "";
+        if (admin.getRole() == 1) {
+            role = "{\"text\":\"case director\",\"id\":2},{\"text\":\"case coordinator\",\"id\":3},{\"text\":\"case manager\",\"id\":4}";
+        } else if (admin.getRole() == 2) {
+            role = "{\"text\":\"case coordinator\",\"id\":3},{\"text\":\"case manager\",\"id\":4}";
+        } else if (admin.getRole() == 3) {
+            role = "{\"text\":\"case manager\",\"id\":4}";
+        }
+        request.setAttribute("role", role);
         return "/jsp/manage/listdoctor";
     }
 
@@ -54,12 +67,13 @@ public class DoctorController {
         String username = ConvertUtil.safeToString(request.getParameter("username"), "");
         String email = ConvertUtil.safeToString(request.getParameter("email"), "");
         String address = ConvertUtil.safeToString(request.getParameter("address"), "");
-        String phone = ConvertUtil.safeToString(request.getParameter("phone1"), "");
+        String phone = ConvertUtil.safeToString(request.getParameter("phone"), "");
         int sex = ConvertUtil.safeToInteger(request.getParameter("sex"), 0);
+        int role = ConvertUtil.safeToInteger(request.getParameter("role_"), 0);
 
         User user = new User();
         if (0 != patientid) {
-            user = (User) userService.getPatientById(patientid);
+            user = userService.getUserById(patientid);
             user.setUpdatetime(new Date());
         } else {
             user.setCreatetime(new Date());
@@ -69,9 +83,43 @@ public class DoctorController {
         user.setEmail(email);
         user.setAddress(address);
         user.setGender(sex);
-        user.setPwd("111111");
+        String pwd = MD5Util.string2MD5("111111" + user.getUsername());
+        user.setPwd(pwd);
         user.setPhone(phone);
+        user.setRole(role);
+        user.setState(1);
         userService.saveUser(user);
         return "success";
     }
+
+    @RequestMapping(value = "/resetpwd", method = RequestMethod.POST)
+    @ResponseBody
+    public String reSetPwd(HttpServletRequest request, HttpServletResponse response) {
+        try{
+            int id = Integer.parseInt(request.getParameter("id"));
+            User user = userService.getUserById(id);
+            String pwd = MD5Util.string2MD5("111111" + user.getUsername());
+            user.setPwd(pwd);
+            user.setUpdatetime(new Date());
+            userService.saveUser(user);
+            return "success";
+        }catch (Exception e){
+            return "failure";
+        }
+    }
+    @RequestMapping(value = "/resetstate", method = RequestMethod.POST)
+       @ResponseBody
+       public String reSetState(HttpServletRequest request, HttpServletResponse response) {
+           try{
+               int id = Integer.parseInt(request.getParameter("id"));
+               int state = Integer.parseInt(request.getParameter("state"));
+               User user = userService.getUserById(id);
+               user.setState(state);
+               userService.saveUser(user);
+               return "success";
+           }catch (Exception e){
+               return "failure";
+           }
+
+       }
 }

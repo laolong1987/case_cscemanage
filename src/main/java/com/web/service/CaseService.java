@@ -1,5 +1,6 @@
 package com.web.service;
 
+import com.common.BaseDao;
 import com.common.SearchTemplate;
 import com.web.dao.CaseDao;
 import com.web.dao.PatientDao;
@@ -16,7 +17,7 @@ import java.util.Map;
  * Created by gaoyang on 16/2/29.
  */
 @Service("caseService")
-public class CaseService {
+public class CaseService extends BaseDao {
 
     @Autowired
     public CaseDao caseDao ;
