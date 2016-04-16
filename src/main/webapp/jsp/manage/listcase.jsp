@@ -42,9 +42,9 @@
                 {name : "patientid", type : "hidden"},
                 {display : "登录名", name : "username", type : "text", group : "编辑", groupicon : icon,
                     validate : {
-                    required : true,
-                    maxlength : 20
-                }},
+                        required : true,
+                        maxlength : 20
+                    }},
                 {display : "姓名", name : "name", type : "text",newline : false,
                     validate : {
                         required : true,
@@ -103,13 +103,13 @@
                     }
                 },
                 {
-                    display : 'case_id',
-                    name : 'id',
+                    display : '姓名',
+                    name : 'name',
                     align : 'center',
                     width : 100,
                     minWidth : 30
                 },{
-                    display : '姓名',
+                    display : '登录名',
                     name : 'username',
                     align : 'center',
                     width : 150,
@@ -121,15 +121,31 @@
                     minWidth : 30,
                     align : 'center'
                 }, {
-                    display : '申请人',
+                    display : '性别',
                     name : 'sex',
                     minWidth : 10,
                     align : 'center',
-                    width : 50
+                    width : 50,
+                    render : function(rowdata, rowindex, value) {
+                        if(rowdata.sex==0){
+                            return "男"
+                        }else if(rowdata.sex==1){
+                            return "女";
+                        }else{
+                            return ""
+                        }
+
+                    }
+
                 },
                 {
-                    display : '指派医生',
+                    display : '地址',
                     name : 'address',
+                    align : 'left'
+                },
+                {
+                    display : '邮箱',
+                    name : 'email',
                     align : 'left'
                 }
             ],
@@ -158,7 +174,7 @@
     function editColumn(data){
         var inputType = 'text';
 
-      //  initSaveForm();
+        //  initSaveForm();
         showWindow();
 
         saveForm.setData({
@@ -266,7 +282,7 @@
                 url : "savepatient",
 //                data : JSON.stringify(params),
                 data : params,
-                 dataType : "text",
+                dataType : "text",
                 success : function(result) {
                     if (result == 'success') {
                         search();
@@ -299,16 +315,15 @@
         </div>
         <div class="l-panel-search-item">
             <input type="button" id="searchbtn" value="查询" />
-            <input type="button" onclick="showWindow()" value="123123123" />
         </div>
     </div>
 </form>
 <!-- 表格 -->
-
+<div id="maingrid" style="margin:0; padding:0"></div>
 <div style="display:none;"></div>
 <div id="addWindow" style="width:99%; margin:3px; display:none;">
     <div class="l-dialog-body" style="width: 100%;">
-        <div id="maingrid" style="margin:0; padding:0"></div>
+        <form id="saveForm"></form>
         <div class="l-dialog-buttons">
             <div class="l-dialog-buttons-inner">
                 <div class="l-dialog-btn">
