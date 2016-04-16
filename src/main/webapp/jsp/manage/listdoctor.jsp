@@ -9,7 +9,7 @@
 <%@ include file="head.jsp" %>
 <html>
 <head>
-  <title>医生管理</title>
+  <title>患者管理</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
@@ -32,15 +32,15 @@
 
     $("#pageloading").hide();
   });
+
   function initSaveForm() {
     saveForm = $("#saveForm").ligerForm({
       inputWidth: 170,
       labelWidth: 100,
-      labelAlign: "right",
-      space: 90,
+      space: 45,
       validate: true,
       fields: [
-        {name: "id", type: "hidden"},
+        {name: "patientid", type: "hidden"},
         {
           display: "登录名",
           name: "username",
@@ -60,11 +60,11 @@
           }
         }, {
           display: "性别",
-          name: "gender",
+          name: "sex",
           newline: true,
           type: "radiolist",
           editor: {
-            data: [{"text": "男", "id": 1}, {"text": "女", "id": 0}]
+            data: [{"text": "男", "id": 0}, {"text": "女", "id": 1}]
           },
         },
         {
@@ -86,7 +86,16 @@
             maxlength: 500
           }
         }, {
-          display: "邮箱",
+          display: "角色",
+          name: "role_",
+          newline: true,
+          type: "combobox",
+          editor: {
+            data: [${role}]
+          }
+        },
+        {
+          display: "邮件",
           name: "email",
           newline: false,
           type: "text",
@@ -136,9 +145,9 @@
           align: 'center',
           width: 50,
           render: function (rowdata) {
-            if (rowdata.sex == 0) {
+            if (rowdata.gender == 0) {
               return "男"
-            } else if (rowdata.sex == 1) {
+            } else if (rowdata.gender == 1) {
               return "女";
             } else {
               return "未知"
@@ -147,9 +156,21 @@
           }
         },
         {
-          display: '职位',
+          display: '角色',
           name: 'position',
-          align: 'center'
+          align: 'center',
+          render: function (rowdata) {
+            if (rowdata.role == 0) {
+              return "enterprise admin"
+            } else if (rowdata.role == 1) {
+              return "case director";
+            } else if (rowdata.role == 2) {
+              return "case coordinator";
+            } else {
+              return "case manager"
+            }
+
+          }
         },
         {
           display: '地址',
@@ -166,7 +187,7 @@
           name: 'state',
           align: 'center',
           render: function (rowdata) {
-            var html = "<a href='javascript:void(0)' onclick='resetPWd(" + rowdata.id + ");' >重置</a>";
+            var html = "<a href='javascript:void(0)' onclick='resetpwdclick(" + rowdata.id + ");' >重置</a>";
             return html;
           }
         },
@@ -217,10 +238,10 @@
       patientid: data.id,
       name: data.name,
       username: data.username,
-      phone: data.phone,
+      phone1: data.phone1,
       email: data.email,
       address: data.address,
-      gender: data.gender
+      sex: data.sex
     });
 
   }
@@ -315,7 +336,7 @@
       var params = saveForm.getData();
       $.ajax({
         type: "POST",
-        url: "savepatient",
+        url: "adduser",
 //                data : JSON.stringify(params),
         data: params,
         dataType: "text",
@@ -336,22 +357,45 @@
     }
   }
 
-  function resetState(id, state) {
-    $.ligerDialog.confirm('是否重置', function (yes) {
+  function resetpwdclick(id) {
+    $.ligerDialog.confirm('是否重置密码为111111?', function (yes) {
+      if (yes) {
+        resetpwd(id);
+      }
+    });
+  }
+
+  function resetpwd(id) {
+    $.ajax({
+      url: "resetpwd",
+      data: {id: id},
+      type: "POST",
+      success: function (result) {
+        $.ligerDialog.success("重置成功", "提示", function () {
+          $.ligerDialog.hide();
+          search();
+        });
+      }
+    });
+  }
+
+  function resetState(id,state) {
+    $.ligerDialog.confirm('是否重置账户状态?', function (yes) {
       if (yes) {
         $.ajax({
-          url: "resetTop",
-          data: {id: id, top: state},
+          url: "resetstate",
+          data: {"id": id,"state":state},
           type: "POST",
           success: function (result) {
             $.ligerDialog.success("重置成功", "提示", function () {
               $.ligerDialog.hide();
-              grid.loadData();
+              search();
             });
           }
         });
       }
     });
+
   }
 </script>
 </head>
@@ -378,7 +422,7 @@
 <div style="display:none;"></div>
 <div id="addWindow" style="width:99%; margin:3px; display:none;">
   <div class="l-dialog-body" style="width: 100%;">
-    <form id="saveForm" class="l-form"></form>
+    <form id="saveForm"></form>
     <div class="l-dialog-buttons">
       <div class="l-dialog-buttons-inner">
         <div class="l-dialog-btn">
