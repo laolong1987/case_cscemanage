@@ -41,9 +41,9 @@ private String email;
 @Column(name ="relation")
 private String relation;
 @Column(name ="city")
-private int city;
+private String city;
 @Column(name ="country")
-private int country;
+private String country;
 @Column(name ="street")
 private int street;
 @Column(name ="zipcode")
@@ -64,6 +64,8 @@ private int updateempid;
 private int userid;
 @Column(name ="file")
 private String file;
+        @Column(name ="status")
+        private int status;
 public void setId(int id){
         this.id=id;
         }
@@ -141,17 +143,17 @@ public String getRelation(){
         return this.relation;
         }
 
-public void setCity(int city){
+public void setCity(String city){
         this.city=city;
         }
-public int getCity(){
+public String getCity(){
         return this.city;
         }
 
-public void setCountry(int country){
+public void setCountry(String country){
         this.country=country;
         }
-public int getCountry(){
+public String getCountry(){
         return this.country;
         }
 
@@ -225,4 +227,11 @@ public String getFile(){
         return this.file;
         }
 
+        public int getStatus() {
+                return status;
         }
+
+        public void setStatus(int status) {
+                this.status = status;
+        }
+}

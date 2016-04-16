@@ -92,61 +92,94 @@
         gridManager = $("#maingrid").ligerGrid({
             columns : [
                 {
-                    display: '操作',
-                    isSort: false,
-                    isExport: false,
-                    width: 50,
-                    align : 'right',
-                    render: function (rowdata, rowindex, value)
-                    {
-                        return "<img title='修改' onclick='editColumn("+JSON.stringify(rowdata)+");' style='margin-top:5px;cursor:pointer;' src='${ctx}/ligerUI/skins/icons/editform.png'/>&nbsp;&nbsp;&nbsp;";
-                    }
-                },
-                {
-                    display : '姓名',
-                    name : 'name',
+                    display : 'CaseID',
+                    name : 'id',
                     align : 'center',
-                    width : 100,
+                    width : 80,
                     minWidth : 30
                 },{
-                    display : '登录名',
-                    name : 'username',
+                    display : 'Name',
+                    name : 'name',
                     align : 'center',
-                    width : 150,
                     minWidth : 60
                 }, {
-                    display : '手机号',
-                    name : 'phone1',
-                    width : 100,
+                    display : 'Country',
+                    name : 'country',
+                    width : 80,
+                    minWidth : 30,
+                    align : 'center'
+                },  {
+                    display : 'City',
+                    name : 'city',
+                    width : 80,
                     minWidth : 30,
                     align : 'center'
                 }, {
-                    display : '性别',
-                    name : 'sex',
+                    display : 'Service Type',
+                    name : 'type',
                     minWidth : 10,
                     align : 'center',
-                    width : 50,
+                    width : 200,
                     render : function(rowdata, rowindex, value) {
-                        if(rowdata.sex==0){
-                            return "男"
-                        }else if(rowdata.sex==1){
-                            return "女";
+                        if(rowdata.type==1){
+                            return "Expert Medical Report"
+                        }else if(rowdata.type==2){
+                            return "Personal Healthy Advisory";
+                        }else if(rowdata.type==3){
+                            return "Stress Management";
+                        }else if(rowdata.type==4){
+                            return "Oientation And Navigation";
                         }else{
                             return ""
                         }
+                }
 
+                },{
+                    display : 'Status',
+                    name : 'status',
+                    minWidth : 10,
+                    align : 'center',
+                    width : 100,
+                    render : function(rowdata, rowindex, value) {
+                        if(rowdata.status==1){
+                            return "Pending"
+                        }else if(rowdata.status==2){
+                            return "Assigned";
+                        }else if(rowdata.status==3){
+                            return "Canceled";
+                        }else if(rowdata.status==4){
+                            return "Completeed";
+                        }else if(rowdata.status==5){
+                            return "Followed";
+                        }else{
+                            return "Pending"
+                        }
+                }
+                }, {
+                    display: 'Action',
+                    isSort: false,
+                    isExport: false,
+                    width: 200,
+                    align : 'right',
+                    render: function (rowdata, rowindex, value)
+                    {
+                        var html1 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',1)">Assign</a> ';
+                        var html2 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',2)">Complete</a> ';
+                        var html3 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',3)">Cancel</a> ';
+                        var html4 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',4)">Follow up</a> ';
+                        return html1+html2+html3+html4;
+                        <%--return "<img title='action' onclick='editColumn("+JSON.stringify(rowdata)+");' style='margin-top:5px;cursor:pointer;' src='${ctx}/ligerUI/skins/icons/editform.png'/>&nbsp;&nbsp;&nbsp;";--%>
                     }
-
-                },
-                {
-                    display : '地址',
-                    name : 'address',
-                    align : 'left'
-                },
-                {
-                    display : '邮箱',
-                    name : 'email',
-                    align : 'left'
+                },{
+                    display: 'node',
+                    isSort: false,
+                    isExport: false,
+                    width: 40,
+                    align : 'right',
+                    render: function (rowdata, rowindex, value)
+                    {
+                        return "<img title='node' onclick='editColumn("+JSON.stringify(rowdata)+");' style='margin-top:5px;cursor:pointer;' src='${ctx}/ligerUI/skins/icons/editform.png'/>&nbsp;&nbsp;&nbsp;";
+                    }
                 }
             ],
             pageSize : 15,
@@ -299,6 +332,28 @@
             });
         }
     }
+
+    function updatestatus(id,status) {
+        $.ajax({
+            type : "POST",
+            url : "updatestatus",
+            data : {id:id,status:status},
+            contentType : "application/json; charset=utf-8",
+            dataType : "text",
+            success : function(result) {
+                if (result == 'success') {
+                    search();
+                    $.ligerDialog.waitting('success');
+                    setTimeout(function() {
+                        $.ligerDialog.closeWaitting();
+                    }, 500);
+                } else {
+                    $.ligerDialog.warn(result);
+                }
+            }
+        });
+    }
+
 </script>
 </head>
 <body style="padding: 5px;">

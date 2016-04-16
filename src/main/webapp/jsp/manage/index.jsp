@@ -84,7 +84,7 @@
             data.push({ id: 1, value: '${ctx}/case/showlist', text: 'case管理' });
             data.push({ id: 2, value: 'http://www.ligerui.com/demos/grid/base/templategrid.htm', text: '人员管理' });
             data.push({ id: 3, value: '${ctx}/doctor/showlist', text: '医生管理' });
-            data.push({ id: 4, value: '${ctx}/patient/showlist', text: '用户管理' });ss
+            data.push({ id: 4, value: '${ctx}/patient/showlist', text: '用户管理' });
             var tree = $("#tree").ligerTree({
                 data:data,
                 nodeWidth : 120,
