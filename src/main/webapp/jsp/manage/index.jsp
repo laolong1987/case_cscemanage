@@ -11,7 +11,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-    <title>I-Warehouse Management System</title>
+    <title>Case Management System</title>
     <link rel="stylesheet" type="text/css" id="mylink" />
     <script type="text/javascript">
         var savePwdWindow = null;
@@ -82,7 +82,7 @@
         function iniMenu(){
             var data = [];
 
-            data.push({ id: 1, value: 'http://www.ligerui.com/demos/grid/base/toolbar.htm', text: 'case管理' });
+            data.push({ id: 1, value: '${ctx}/case/showlist', text: 'case管理' });
             data.push({ id: 2, value: 'http://www.ligerui.com/demos/grid/base/templategrid.htm', text: '人员管理' });
             data.push({ id: 3, value: '${ctx}/patient/showlist', text: '用户管理' });
             var tree = $("#tree").ligerTree({

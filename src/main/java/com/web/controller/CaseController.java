@@ -30,7 +30,7 @@ public class CaseController {
     @RequestMapping(value = "/showlist")
     public String showlist(HttpServletRequest request,
                                 HttpServletResponse response) {
-        return "/jsp/manage/listpatient";
+        return "/jsp/manage/listcase";
     }
 
     @RequestMapping(value = "/searchlist",method = RequestMethod.POST)
