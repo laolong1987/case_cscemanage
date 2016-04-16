@@ -173,7 +173,7 @@
             <%--}--%>
             <%--$.ajax({--%>
                 <%--type : "POST",--%>
-                <%--url : "${ctx}/logon",--%>
+                <%--url : "/logon",--%>
                 <%--data : JSON.stringify(param),--%>
                 <%--contentType : "application/json; charset=utf-8",--%>
                 <%--dataType : "JSON",--%>
@@ -189,12 +189,28 @@
                 <%--}--%>
             <%--});--%>
         }
+        function loginValidate(){
+            var username=$("#username").val();
+            var pwd=$("#password").val();
+            if(username=="" || username==null){
+                $(".message").show();
+                $("#msg").html("用户名不可为空");
+                return false;
+            }
+            if(pwd==""|| pwd==null){
+                $(".message").show();
+                $("#msg").html("用户名不可为空");
+                return false;
+            }
+            return true;
+        }
+
     </script>
 </head>
 <body>
 <section class="login">
     <article class="login-article">
-        <form id="logonForm" method="post">
+        <form id="logonForm" action="login" method="post" >
             <article class="message">
                 <p class="error" id="msg"></p>
             </article>
@@ -202,19 +218,15 @@
                 <li class="username"><label for="username">&nbsp;</label> <input
                         type="text" name="username" id="username"></li>
                 <li class="username"><label for="password">&nbsp;</label> <input
-                        type="password" name="password" id="password"></li>
+                        type="password" name="pwd" id="password"></li>
                 <!-- <li class="savelogin"><label>&nbsp;<input id="autologon" name="autologon" type="checkbox" value="1">自动登录</label></li> -->
             </ul>
             <aside class="login-submit-button" id="submit-button">
-                <button type="button" id="loginBtn" onclick="logon();"></button>
+                <button type="submit" id="loginBtn" onclick="return loginValidate()"></button>
                 <!-- <span style="line-height: 24px;height: 24px;"> <a id="supportBtn" href="###">支持中心</a> </span> -->
             </aside>
         </form>
     </article>
 </section>
-<form id="hrefForm" accept-charset="UTF-8" action="first.jsp" method="post">
-    <input id="tabid" name="tabid" type="hidden" value="${param.tabid}" />
-    <input id="params" name="params" type="hidden" value="${param.params}" />
-</form>
 </body>
 </html>
