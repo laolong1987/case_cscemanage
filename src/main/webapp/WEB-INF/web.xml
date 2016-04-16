@@ -57,6 +57,13 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+
+  <!-- 配置CORS实现跨域提交 -->
+  <filter>
+  	<filter-name>CORS</filter-name>
+  	<filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+  </filter>
+
   <!-- 配置SpringMVC -->
   <servlet>
     <servlet-name>springMVC</servlet-name>
