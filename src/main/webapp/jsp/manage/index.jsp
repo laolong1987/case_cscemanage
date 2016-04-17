@@ -81,10 +81,9 @@
 
         function iniMenu(){
             var data = [];
-            data.push({ id: 1, value: '${ctx}/case/showlist', text: 'case管理' });
-            data.push({ id: 2, value: 'http://www.ligerui.com/demos/grid/base/templategrid.htm', text: '人员管理' });
-            data.push({ id: 3, value: '${ctx}/doctor/showlist', text: '医生管理' });
-            data.push({ id: 4, value: '${ctx}/patient/showlist', text: '用户管理' });
+            data.push({ id: 1, value: '${ctx}/case/showlist', text: 'Case Admin' });
+            data.push({ id: 3, value: '${ctx}/doctor/showlist', text: 'Staff' });
+            data.push({ id: 4, value: '${ctx}/patient/showlist', text: 'Customer' });
             var tree = $("#tree").ligerTree({
                 data:data,
                 nodeWidth : 120,
@@ -613,25 +612,28 @@
             </ul>
             <p></p>
         </div>
-        <div class="name">管理平台</div>
+        <div class="name">Service Admin Plaform</div>
 
         <div class="loginbox">
 
-            <img src="${ctx}/images/logout.png" onmouseover="this.style.cursor='pointer'" onclick="logout();" title="注销" />&nbsp;
-            <img src="${ctx}/images/changepassword.png" onmouseover="this.style.cursor='pointer'" onclick="openPwd();" title="修改密码">
+           <!--
+           <img src="/images/logout.png" onmouseover="this.style.cursor='pointer'" onclick="logout();" title="注销" />&nbsp;
+
+            <img src="/images/changepassword.png" onmouseover="this.style.cursor='pointer'" onclick="openPwd();" title="修改密码">
+             -->
         </div>
         <div style=" color: #4a4a4a;font: 16px Microsoft Yahei;right: 10px;position: absolute;top: 15px;">你好,${employee.name}</div>
-        <div class="weizhi">XX System</div>
+        <div class="weizhi"></div>
     </div>
 </div>
 <div id="layout1" style="width:99.2%; margin:0 auto; margin-top:4px; ">
-    <div position="left" title="菜单" id="accordion1">
+    <div position="left" title="Menu" id="accordion1">
         <ul id="tree"></ul>
 
     </div>
     <div position="center" id="framecenter">
         <div tabid="home" title="我的主页" style="height:300px">
-            <iframe frameborder="0" name="home" id="home" src="views/home.jsp"></iframe>
+            <iframe frameborder="0" name="home" id="home" src="views/listcast.jsp"></iframe>
         </div>
     </div>
 </div>

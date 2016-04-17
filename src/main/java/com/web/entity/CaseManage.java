@@ -24,6 +24,8 @@ public class CaseManage {
     private int id;
     @Column(name = "name")
     private String name;
+    @Column(name = "apply_name")
+    private String apply_name;
     @Column(name = "birthday")
     private Date birthday;
     @Column(name = "createname")
@@ -44,6 +46,9 @@ public class CaseManage {
     private String relation;
     @Column(name = "city")
     private String city;
+
+    @Column(name = "province")
+    private String province;
     @Column(name = "country")
     private String country;
     @Column(name = "street")
@@ -279,6 +284,22 @@ public class CaseManage {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getApply_name() {
+        return apply_name;
+    }
+
+    public void setApply_name(String apply_name) {
+        this.apply_name = apply_name;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 }
 

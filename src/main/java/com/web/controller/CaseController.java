@@ -96,28 +96,41 @@ public class CaseController {
     @ResponseBody
     public String savaCaseInfo(HttpServletRequest request, HttpServletResponse response) throws ParseException {
         try {
-            String form_type = request.getParameter("form-type");
-            String patient_name = request.getParameter("patient-name");
-            String patient_birth = request.getParameter("patient-birth");
-            String patient_gender = request.getParameter("patient-gender");
+            String form_type = request.getParameter("form_type");
+            String patient_name =request.getParameter("patient_name");
+            String patient_birth = request.getParameter("patient_birth");
+            int patient_gender =ConvertUtil.safeToInteger( request.getParameter("patient_gender"),0) ;
             String relation = request.getParameter("relation");
-            String applicant_name = request.getParameter("applicant-name");
+            String applicant_name = request.getParameter("applicant_name");
             String province = request.getParameter("province");
             String city = request.getParameter("city");
-            String address_details = request.getParameter("address-details");
-            String user_zip = request.getParameter("user-zip");
-            String user_first_phone = request.getParameter("user-first-phone");
-            String user_second_phone = request.getParameter("user-second-phone");
-            String user_email = request.getParameter("user-email");
-            String user_time = request.getParameter("user-time");
-            String info_details = request.getParameter("info-details");
-            String doctor_name = request.getParameter("doctor-name");
-            String doctor_hospital = request.getParameter("doctor-hospital");
-            String doctor_major = request.getParameter("doctor-major");
+            String address_details = request.getParameter("address_details");
+            String user_zip = request.getParameter("user_zip");
+            String user_first_phone = request.getParameter("user_first_phone");
+            String user_second_phone = request.getParameter("user_second_phone");
+            String user_email = request.getParameter("user_email");
+            String user_time = request.getParameter("user_time");
+            String info_details = request.getParameter("info_details");
+            String doctor_name = request.getParameter("doctor_name");
+            String doctor_hospital = request.getParameter("doctor_hospital");
+            String doctor_major = request.getParameter("doctor_major");
             CaseManage caseManage = new CaseManage();
             caseManage.setAddress(address_details);
-            caseManage.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(patient_birth));
+//            caseManage.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(patient_birth));
             caseManage.setType(Integer.parseInt(form_type));
+
+            caseManage.setName(patient_name);
+            caseManage.setSex(patient_gender);
+            caseManage.setRelation(relation);
+            caseManage.setApply_name(applicant_name);
+            caseManage.setCity(city);
+            caseManage.setProvince(province);
+            caseManage.setAddress(address_details);
+            caseManage.setZipcode(user_zip);
+            caseManage.setPhone1(user_first_phone);
+            caseManage.setPhone2(user_second_phone);
+            caseManage.setEmail(user_email);
+
             caseService.save(caseManage);
             return "ok";
         }catch(Exception e){
