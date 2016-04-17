@@ -42,7 +42,7 @@ public class CaseController {
     @ResponseBody
     public Object searchlist(@RequestBody Map<String, String> param) {
 
-        return caseService.searchPatient(param).getResult();
+        return caseService.searchCase(param).getResult();
     }
 
 
@@ -54,7 +54,37 @@ public class CaseController {
         int status = ConvertUtil.safeToInteger(request.getParameter("status"), 0);
         if (0 != id) {
             CaseManage caseManage = caseService.getCaseById(id);
-//            caseManage.setStatus(status);
+            caseManage.setStatus(status);
+            caseService.saveCase(caseManage);
+        }
+        return "success";
+    }
+
+    @RequestMapping(value = "/updateuserid",method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateuserid(HttpServletRequest request,
+                               HttpServletResponse response) {
+        int id = ConvertUtil.safeToInteger(request.getParameter("id"), 0);
+        int userid = ConvertUtil.safeToInteger(request.getParameter("userid"), 0);
+        if (0 != id) {
+            CaseManage caseManage = caseService.getCaseById(id);
+            caseManage.setUserid(userid);
+            caseManage.setStatus(2);
+            caseService.saveCase(caseManage);
+        }
+        return "success";
+    }
+
+
+    @RequestMapping(value = "/updatenote",method = RequestMethod.POST)
+    @ResponseBody
+    public Object updatenote(HttpServletRequest request,
+                               HttpServletResponse response) {
+        int id = ConvertUtil.safeToInteger(request.getParameter("id"), 0);
+        String note = ConvertUtil.safeToString(request.getParameter("note"), "");
+        if (0 != id) {
+            CaseManage caseManage = caseService.getCaseById(id);
+            caseManage.setNote(note);
             caseService.saveCase(caseManage);
         }
         return "success";

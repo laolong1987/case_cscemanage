@@ -27,7 +27,7 @@ public class CaseService extends BaseDao {
      * @param map
      * @return
      */
-    public SearchTemplate searchPatient(Map map){
+    public SearchTemplate searchCase(Map map){
         return caseDao.searchCase(map);
     }
 

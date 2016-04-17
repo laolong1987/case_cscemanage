@@ -21,7 +21,10 @@ public class CaseDao extends BaseDao{
      */
     public SearchTemplate searchCase(Map map){
         StringBuffer sql =new StringBuffer();
-        sql.append("select * from casemanage a left join patient b on a.createempid=b.id where 1=1");
+        sql.append("select  a.id,a.name,a.type,a.status,a.city,a.country,c.name as username,a.note  from casemanage a ");
+        sql.append("left join patient b on a.createempid=b.id  ");
+        sql.append("left join medical.user c on a.userid=c.id  ");
+        sql.append("where 1=1 ");
         Map p=new HashMap();
         return super.search(sql.toString(),p);
     }

@@ -17,8 +17,11 @@
     var gridManager = null;
     var saveForm = null;
     var saveWindow = null;
+    var assignWindow = null;
+    var noteWindow = null;
     var typeData = null;
     var icon = '${ctx}/ligerUI/skins/icons/pager.gif';
+    var condition = { fields: [{ name: 'name', label: 'name',width:90,type:'text' }] };
 
     $(function() {
         $("#searchbtn").ligerButton({
@@ -39,52 +42,10 @@
             space : 45,
             validate : true,
             fields : [
-                {name : "patientid", type : "hidden"},
-                {display : "登录名", name : "username", type : "text", group : "编辑", groupicon : icon,
-                    validate : {
-                        required : true,
-                        maxlength : 20
-                    }},
-                {display : "姓名", name : "name", type : "text",newline : false,
-                    validate : {
-                        required : true,
-                        maxlength : 20
-                    }
-                },{	display : "性别",
-                    name : "sex",
-                    newline : true,
-                    type : "radiolist",
-                    editor : {
-                        data : [{"text":"男","id":0},{"text":"女","id":1}]
-                    },
-                },
-                {	display : "手机号",
-                    name : "phone1",
-                    newline : true,
-                    type : "text",
-                    validate : {
-                        required : true,
-                        maxlength : 11
-                    }
-                }, {
-                    display : "地址",
-                    name : "address",
-                    newline : false,
-                    type : "text",
-                    validate : {
-                        required : true,
-                        maxlength : 500
-                    }
-                }, {
-                    display : "邮件",
-                    name : "email",
-                    newline : false,
-                    type : "text",
-                    validate : {
-                        required : true,
-                        maxlength : 500
-                    }
-                }]
+                {display : "name", name : "name", type : "label", group : "明细", groupicon : icon},
+                {display : "birthday", name : "birthday", type : "label"},
+                {display : "remark", name : "remark", type : "label"}
+          ]
         });
     }
     function setGrid(){
@@ -96,10 +57,19 @@
                     name : 'id',
                     align : 'center',
                     width : 80,
-                    minWidth : 30
+                    minWidth : 30,
+                    render: function (rowdata, rowindex, value)
+                    {
+                        return "<img title="+rowdata.id+" onclick='editColumn("+JSON.stringify(rowdata)+");' style='margin-top:5px;cursor:pointer;' src='${ctx}/ligerUI/skins/icons/editform.png'/>&nbsp;&nbsp;&nbsp;";
+                    }
                 },{
                     display : 'Name',
                     name : 'name',
+                    align : 'center',
+                    minWidth : 60
+                }, {
+                    display : 'Case Manager',
+                    name : 'username',
                     align : 'center',
                     minWidth : 60
                 }, {
@@ -163,44 +133,31 @@
                     align : 'right',
                     render: function (rowdata, rowindex, value)
                     {
-                        var html1 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',1)">Assign</a> ';
-                        var html2 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',2)">Complete</a> ';
+                        var html1 = '<a href="#" onclick="showassign(2)">Assign</a> ';
+                        var html2 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',4)">Complete</a> ';
                         var html3 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',3)">Cancel</a> ';
-                        var html4 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',4)">Follow up</a> ';
+                        var html4 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',5)">Follow up</a> ';
                         return html1+html2+html3+html4;
                         <%--return "<img title='action' onclick='editColumn("+JSON.stringify(rowdata)+");' style='margin-top:5px;cursor:pointer;' src='${ctx}/ligerUI/skins/icons/editform.png'/>&nbsp;&nbsp;&nbsp;";--%>
                     }
                 },{
-                    display: 'node',
+                    display: 'note',
                     isSort: false,
                     isExport: false,
                     width: 40,
                     align : 'right',
                     render: function (rowdata, rowindex, value)
                     {
-                        return "<img title='node' onclick='editColumn("+JSON.stringify(rowdata)+");' style='margin-top:5px;cursor:pointer;' src='${ctx}/ligerUI/skins/icons/editform.png'/>&nbsp;&nbsp;&nbsp;";
+                        return "<img title='note' onclick='shownote("+JSON.stringify(rowdata)+");' style='margin-top:5px;cursor:pointer;' src='${ctx}/ligerUI/skins/icons/editform.png'/>&nbsp;&nbsp;&nbsp;";
                     }
                 }
             ],
             pageSize : 15,
-            url : "${ctx}/patient/searchlist",
+            url : "${ctx}/case/searchlist",
             rownumbers : true,
             checkbox : true,
             selectRowButtonOnly : true,
-            isScroll : true,
-            toolbar : {
-                items : [ {
-                    id : 'add',
-                    text : '增加',
-                    click : itemclick,
-                    img : '${ctx}/ligerUI/skins/icons/addpage.png'
-                }, {
-                    id : 'delete',
-                    text : '删除',
-                    click : itemclick,
-                    img : '${ctx}/ligerUI/skins/icons/busy.gif'
-                }]
-            }
+            isScroll : true
         });
     }
 
@@ -211,13 +168,10 @@
         showWindow();
 
         saveForm.setData({
-            patientid: data.id,
+            address: data.address,
             name: data.name,
             username : data.username,
-            phone1 : data.phone1,
-            email : data.email,
-            address : data.address,
-            sex : data.sex
+            remark : data.remark
         });
 
     }
@@ -337,8 +291,7 @@
         $.ajax({
             type : "POST",
             url : "updatestatus",
-            data : {id:id,status:status},
-            contentType : "application/json; charset=utf-8",
+            data : {'id':id,'status':status},
             dataType : "text",
             success : function(result) {
                 if (result == 'success') {
@@ -354,6 +307,114 @@
         });
     }
 
+    function getGridOptions()
+    {
+        var options = {
+            columns: [
+                { display: 'id', name: 'id', width: 100 },
+                { display: '名称', name: 'name', width: 100 }
+            ], switchPageSizeApplyComboBox: false,
+            url: "${ctx}/doctor/searchlist",
+            pageSize: 10
+        };
+        return options;
+    }
+
+    function showassign(id){
+        $("#txt2").ligerComboBox({
+            width: 250,
+            slide: false,
+            selectBoxWidth: 500,
+            selectBoxHeight: 240,
+            valueField: 'id',
+            textField: 'name',
+            grid: getGridOptions(),
+            condition: condition
+        });
+
+        if (assignWindow == null) {
+            assignWindow = $.ligerDialog.open({
+                title : "assign",
+                target : $("#assignWindow"),
+                width : 400,
+                height : 'auto',
+                isResize : true
+            });
+        }
+        $("#upassignid").val(id);
+        assignWindow.show();
+    }
+
+    function assign(){
+        var upid = $("#upassignid").val();
+        var userid = $("#txt2_val").val();
+
+        $.ajax({
+            type : "POST",
+            url : "updateuserid",
+            data : {'id':upid,'userid':userid},
+            dataType : "text",
+            success : function(result) {
+                if (result == 'success') {
+                    search();
+                    $.ligerDialog.waitting('success');
+                    setTimeout(function() {
+                        $.ligerDialog.closeWaitting();
+                    }, 500);
+                } else {
+                    $.ligerDialog.warn(result);
+                }
+            }
+        });
+        closeassignWindow();
+    }
+
+
+    function closeassignWindow() {
+        assignWindow.hide();
+    }
+    function closenoteWindow() {
+        noteWindow.hide();
+    }
+
+    function shownote(data){
+        if (noteWindow == null) {
+            noteWindow = $.ligerDialog.open({
+                title : "note",
+                target : $("#noteWindow"),
+                width : 600,
+                height : 'auto',
+                isResize : true
+            });
+        }
+        $("#upnoteid").val(data.id);
+        $("#note").val(data.note);
+        noteWindow.show();
+    }
+
+    function addnote(){
+        var upid = $("#upnoteid").val();
+        var note = $("#note").val();
+
+        $.ajax({
+            type : "POST",
+            url : "updatenote",
+            data : {'id':upid,'note':note},
+            dataType : "text",
+            success : function(result) {
+                if (result == 'success') {
+                    search();
+                    $.ligerDialog.waitting('success');
+                    setTimeout(function() {
+                        $.ligerDialog.closeWaitting();
+                    }, 500);
+                } else {
+                    $.ligerDialog.warn(result);
+                }
+            }
+        });
+        closenoteWindow();
+    }
 </script>
 </head>
 <body style="padding: 5px;">
@@ -373,6 +434,9 @@
         </div>
     </div>
 </form>
+
+
+
 <!-- 表格 -->
 <div id="maingrid" style="margin:0; padding:0"></div>
 <div style="display:none;"></div>
@@ -384,17 +448,60 @@
                 <div class="l-dialog-btn">
                     <div class="l-dialog-btn-l"></div>
                     <div class="l-dialog-btn-r"></div>
-                    <div class="l-dialog-btn-inner" onclick="closeWindow();">取消</div>
-                </div>
-                <div class="l-dialog-btn">
-                    <div class="l-dialog-btn-l"></div>
-                    <div class="l-dialog-btn-r"></div>
-                    <div class="l-dialog-btn-inner" onclick="save();">确定</div>
+                    <div class="l-dialog-btn-inner" onclick="closeWindow();">关闭</div>
                 </div>
                 <div class="l-clear"></div>
             </div>
         </div>
     </div>
 </div>
+
+
+<div id="assignWindow" style="width:99%; margin:3px; display:none;">
+    <div class="l-dialog-body" style="width: 100%;">
+        <input type="text" id="txt2" />
+        <input type="hidden" id="upassignid" name="upassignid" />
+        <div class="l-dialog-buttons">
+            <div class="l-dialog-buttons-inner">
+                <div class="l-dialog-btn">
+                    <div class="l-dialog-btn-l"></div>
+                    <div class="l-dialog-btn-r"></div>
+                    <div class="l-dialog-btn-inner" onclick="closeassignWindow();">取消</div>
+                </div>
+                <div class="l-dialog-btn">
+                    <div class="l-dialog-btn-l"></div>
+                    <div class="l-dialog-btn-r"></div>
+                    <div class="l-dialog-btn-inner" onclick="addnote();">确定</div>
+                </div>
+                <div class="l-clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="noteWindow" style="width:99%; margin:3px; display:none;">
+    <div class="l-dialog-body" style="width: 100%;">
+        <textarea cols="100" rows="4" class="l-textarea"  id="note" name="note"></textarea>
+        <input type="hidden" id="upnoteid" name="upnoteid" />
+        <div class="l-dialog-buttons">
+            <div class="l-dialog-buttons-inner">
+                <div class="l-dialog-btn">
+                    <div class="l-dialog-btn-l"></div>
+                    <div class="l-dialog-btn-r"></div>
+                    <div class="l-dialog-btn-inner" onclick="closenoteWindow();">取消</div>
+                </div>
+                <div class="l-dialog-btn">
+                    <div class="l-dialog-btn-l"></div>
+                    <div class="l-dialog-btn-r"></div>
+                    <div class="l-dialog-btn-inner" onclick="addnote();">确定</div>
+                </div>
+                <div class="l-clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

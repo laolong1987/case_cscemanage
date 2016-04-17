@@ -70,7 +70,16 @@ public class CaseManage {
     private int type;
     @Column(name = "status")
     private int status;
+    @Column(name = "note")
+    private String note;
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
     public String getEmail() {
         return email;
