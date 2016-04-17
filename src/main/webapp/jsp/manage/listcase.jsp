@@ -60,7 +60,7 @@
                     minWidth : 30,
                     render: function (rowdata, rowindex, value)
                     {
-                        return "<img title="+rowdata.id+" onclick='editColumn("+JSON.stringify(rowdata)+");' style='margin-top:5px;cursor:pointer;' src='${ctx}/ligerUI/skins/icons/editform.png'/>&nbsp;&nbsp;&nbsp;";
+                        return "<a href='#'  onclick='editColumn("+JSON.stringify(rowdata)+");' >"+rowdata.id+"</a>";
                     }
                 },{
                     display : 'Name',
