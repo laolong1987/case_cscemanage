@@ -92,11 +92,12 @@ public class CaseController {
 
 
 
-    @RequestMapping("/save")
+    @RequestMapping(value="/save",method = RequestMethod.POST)
     @ResponseBody
     public String savaCaseInfo(HttpServletRequest request, HttpServletResponse response) throws ParseException {
         try {
             String form_type = request.getParameter("form_type");
+
             String patient_name =request.getParameter("patient_name");
             String patient_birth = request.getParameter("patient_birth");
             String gender=request.getParameter("patient_gender");
@@ -105,6 +106,20 @@ public class CaseController {
                 patient_gender=1;
             }
             String relation = request.getParameter("relation");
+            if(relation.equals("no")){
+                String other_relation=request.getParameter("other_relation");
+                if(other_relation.equals("1")){
+                    relation="父母";
+                }else if(other_relation.equals("2")){
+                    relation="子女";
+                }else if(other_relation.equals("3")){
+                    relation="配偶";
+                }else {
+                    relation="其他";
+                }
+            }else{
+                relation="本人";
+            }
             String applicant_name = request.getParameter("applicant_name");
             String province = request.getParameter("province");
             String city = request.getParameter("city");
@@ -120,13 +135,13 @@ public class CaseController {
             String doctor_major = request.getParameter("doctor_major");
             CaseManage caseManage = new CaseManage();
             caseManage.setAddress(address_details);
-//            caseManage.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(patient_birth));
+            caseManage.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(patient_birth));
             caseManage.setType(1);
 
             caseManage.setName(patient_name);
             caseManage.setSex(patient_gender);
             caseManage.setRelation(relation);
-            caseManage.setApply_name(applicant_name);
+            caseManage.setCreatename(applicant_name);
             caseManage.setCity(city);
             caseManage.setProvince(province);
             caseManage.setAddress(address_details);
@@ -134,6 +149,12 @@ public class CaseController {
             caseManage.setPhone1(user_first_phone);
             caseManage.setPhone2(user_second_phone);
             caseManage.setEmail(user_email);
+            caseManage.setRemark(info_details);
+            caseManage.setPhonetime(user_time);
+            caseManage.setDoctor_hospital(doctor_hospital);
+            caseManage.setDoctor_name(doctor_name);
+            caseManage.setDoctor_major(doctor_major);
+            caseManage.setCreatetime(new Date());
 
             caseService.save(caseManage);
             return "ok";

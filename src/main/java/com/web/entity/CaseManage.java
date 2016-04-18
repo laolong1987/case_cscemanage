@@ -47,6 +47,15 @@ public class CaseManage {
     @Column(name = "city")
     private String city;
 
+    @Column(name = "doctor_name")
+    private String doctor_name;
+
+    @Column(name = "doctor_hospital")
+    private String doctor_hospital;
+
+    @Column(name = "doctor_major")
+    private String doctor_major;
+
     @Column(name = "province")
     private String province;
     @Column(name = "country")
@@ -300,6 +309,30 @@ public class CaseManage {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    public String getDoctor_name() {
+        return doctor_name;
+    }
+
+    public void setDoctor_name(String doctor_name) {
+        this.doctor_name = doctor_name;
+    }
+
+    public String getDoctor_hospital() {
+        return doctor_hospital;
+    }
+
+    public void setDoctor_hospital(String doctor_hospital) {
+        this.doctor_hospital = doctor_hospital;
+    }
+
+    public String getDoctor_major() {
+        return doctor_major;
+    }
+
+    public void setDoctor_major(String doctor_major) {
+        this.doctor_major = doctor_major;
     }
 }
 
