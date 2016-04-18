@@ -471,7 +471,7 @@
                 <div class="l-dialog-btn">
                     <div class="l-dialog-btn-l"></div>
                     <div class="l-dialog-btn-r"></div>
-                    <div class="l-dialog-btn-inner" onclick="addnote();">确定</div>
+                    <div class="l-dialog-btn-inner" onclick="assign();">确定</div>
                 </div>
                 <div class="l-clear"></div>
             </div>
