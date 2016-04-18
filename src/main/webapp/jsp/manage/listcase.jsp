@@ -42,10 +42,27 @@
             space : 45,
             validate : true,
             fields : [
-                {display : "name", name : "name", type : "label", group : "明细", groupicon : icon},
-                {display : "birthday", name : "birthday", type : "label"},
-                {display : "remark", name : "remark", type : "label"}
-          ]
+                {display : "服务类型", name : "typename", type : "label", group : "明细", groupicon : icon},
+                {display : "开case时间", name : "createtime", type : "label"},
+                {display : "患者姓名", name : "name", type : "label",newline :true},
+                {display : "性别", name : "sexname", type : "label"},
+                {display : "申请人与患者关系", name : "relation", type : "label"},
+                {display : "申请人姓名", name : "createname", type : "label"},
+                {display : "国家", name : "country", type : "label"},
+                {display : "省", name : "province", type : "label"},
+                {display : "城市", name : "city", type : "label"},
+                {display : "详细地址", name : "address", type : "label"},
+                {display : "首选电话", name : "phone1", type : "label"},
+                {display : "备选电话", name : "phone2", type : "label"},
+                {display : "邮箱", name : "email", type : "label"},
+                {display : "联系时间", name : "phonetime", type : "label"},
+                {display : "患者的情况和需求", name : "remark", type : "label"},
+                {display : "皇者当前大多治疗医生的姓名", name : "doctor_name", type : "label"},
+                {display : "皇者当前大多治疗医生所处的医院", name : "doctor_hospital", type : "label"},
+                {display : "皇者当前大多治疗医生的专科", name : "doctor_major", type : "label"},
+                {display : "当前的Case Manager", name : "username", type : "label"},
+                {display : "Note", name : "notecontent", type : "label"}
+            ]
         });
     }
     function setGrid(){
@@ -170,8 +187,24 @@
         saveForm.setData({
             address: data.address,
             name: data.name,
+            city : data.city,
+            country : data.country,
             username : data.username,
-            remark : data.remark
+            typename : data.typename,
+            birthday : data.birthday,
+            sexname : data.sexname,
+            relation : data.relation,
+            createname : data.createname,
+            province : data.province,
+            phone1 : data.phone1,
+            phone2 : data.phone2,
+            email : data.email,
+            phonetime : data.phonetime,
+            doctor_name : data.doctor_name,
+            doctor_hospital : data.doctor_hospital,
+            doctor_major : data.doctor_major,
+            remark : data.remark,
+            notecontent : data.note
         });
 
     }
@@ -474,7 +507,7 @@
                     <div class="l-dialog-btn-inner" onclick="assign();">确定</div>
                 </div>
                 <div class="l-clear"></div>
-            </div>
+             </div>
         </div>
     </div>
 </div>
