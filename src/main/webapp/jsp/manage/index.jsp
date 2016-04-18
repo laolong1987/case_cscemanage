@@ -643,7 +643,7 @@
     </div>
     <div position="center" id="framecenter">
         <div tabid="home" title="我的主页" style="height:300px">
-            <iframe frameborder="0" name="home" id="home" src="views/listcast.jsp"></iframe>
+            <iframe frameborder="0" name="home" id="home" src="${ctx}/case/showlist"></iframe>
         </div>
     </div>
 </div>
