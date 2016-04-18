@@ -99,7 +99,11 @@ public class CaseController {
             String form_type = request.getParameter("form_type");
             String patient_name =request.getParameter("patient_name");
             String patient_birth = request.getParameter("patient_birth");
-            int patient_gender =ConvertUtil.safeToInteger( request.getParameter("patient_gender"),0) ;
+            String gender=request.getParameter("patient_gender");
+            int patient_gender =0;
+            if(gender.equals("female")){
+                patient_gender=1;
+            }
             String relation = request.getParameter("relation");
             String applicant_name = request.getParameter("applicant_name");
             String province = request.getParameter("province");
@@ -117,7 +121,7 @@ public class CaseController {
             CaseManage caseManage = new CaseManage();
             caseManage.setAddress(address_details);
 //            caseManage.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(patient_birth));
-            caseManage.setType(Integer.parseInt(form_type));
+            caseManage.setType(1);
 
             caseManage.setName(patient_name);
             caseManage.setSex(patient_gender);
@@ -134,6 +138,7 @@ public class CaseController {
             caseService.save(caseManage);
             return "ok";
         }catch(Exception e){
+            e.printStackTrace();
             return "failure";
         }
 
