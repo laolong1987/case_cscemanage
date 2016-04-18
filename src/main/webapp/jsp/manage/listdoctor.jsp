@@ -42,7 +42,7 @@
       fields: [
         {name: "patientid", type: "hidden"},
         {
-          display: "登录名",
+          display: "userId",
           name: "username",
           type: "text",
           group: "编辑",
@@ -51,51 +51,41 @@
             required: true,
             maxlength: 20
           }
+        }, {
+          display: "domain",
+          name: "domain",
+          type: "text",
+          validate: {
+            required: true,
+          }
         },
         {
-          display: "姓名", name: "name", type: "text", newline: false,
+          display: "name", name: "name", type: "text", newline: false,
           validate: {
             required: true,
             maxlength: 20
           }
-        }, {
-          display: "性别",
-          name: "sex",
-          newline: true,
-          type: "radiolist",
-          editor: {
-            data: [{"text": "男", "id": 0}, {"text": "女", "id": 1}]
-          },
         },
         {
-          display: "手机号",
-          name: "phone",
+          display: "company",
+          name: "company",
           newline: true,
-          type: "text",
-          validate: {
-            required: true,
-            maxlength: 11
-          }
-        }, {
-          display: "地址",
-          name: "address",
-          newline: false,
-          type: "text",
-          validate: {
-            required: true,
-            maxlength: 500
-          }
-        }, {
-          display: "角色",
+          type: "text"
+        },
+        {
+          display: "role",
           name: "role_",
           newline: true,
           type: "combobox",
           editor: {
             data: [${role}]
+          },
+          validate: {
+            required: true,
           }
         },
         {
-          display: "邮件",
+          display: "email",
           name: "email",
           newline: false,
           type: "text",
@@ -132,28 +122,6 @@
           align: 'center',
           width: 150,
           minWidth: 60
-        }, {
-          display: '手机号',
-          name: 'phone',
-          width: 100,
-          minWidth: 30,
-          align: 'center'
-        }, {
-          display: '性别',
-          name: 'gender',
-          minWidth: 10,
-          align: 'center',
-          width: 50,
-          render: function (rowdata) {
-            if (rowdata.gender == 0) {
-              return "男"
-            } else if (rowdata.gender == 1) {
-              return "女";
-            } else {
-              return "未知"
-            }
-
-          }
         },
         {
           display: '角色',
@@ -171,11 +139,6 @@
             }
 
           }
-        },
-        {
-          display: '地址',
-          name: 'address',
-          align: 'left'
         },
         {
           display: '邮箱',
@@ -379,12 +342,12 @@
     });
   }
 
-  function resetState(id,state) {
+  function resetState(id, state) {
     $.ligerDialog.confirm('是否重置账户状态?', function (yes) {
       if (yes) {
         $.ajax({
           url: "resetstate",
-          data: {"id": id,"state":state},
+          data: {"id": id, "state": state},
           type: "POST",
           success: function (result) {
             $.ligerDialog.success("重置成功", "提示", function () {

@@ -303,6 +303,13 @@
             $("#pwdForm")[0].reset();
             savePwdWindow.show();
         }
+
+        $(function () {
+
+                //这里是在鼠标经过时才显示，没有传入参数，或者传入的参数列表有 auto:true这个参数/值
+            $("#message1").ligerTip({ content: "未处理消息", width: 74  });
+
+            });
     </script>
     <style type="text/css">
         /* 头部信息-------------------------左 */
@@ -622,7 +629,10 @@
             <img src="/images/changepassword.png" onmouseover="this.style.cursor='pointer'" onclick="openPwd();" title="修改密码">
              -->
         </div>
-        <div style=" color: #4a4a4a;font: 16px Microsoft Yahei;right: 10px;position: absolute;top: 15px;">你好,${employee.name}</div>
+        <div id="message1" class="message" style="right: 260px;position: absolute;font: 16px Microsoft Yahei; top: 24px" ligertipid="Tip1000"  title="您有78条消息未处理">
+            78
+        </div>
+        <div style=" color: #4a4a4a;font: 16px Microsoft Yahei;right: 80px;position: absolute;top: 24px;">你好,${user.name}</div>
         <div class="weizhi"></div>
     </div>
 </div>

@@ -66,9 +66,8 @@ public class DoctorController {
         String name = ConvertUtil.safeToString(request.getParameter("name"), "");
         String username = ConvertUtil.safeToString(request.getParameter("username"), "");
         String email = ConvertUtil.safeToString(request.getParameter("email"), "");
-        String address = ConvertUtil.safeToString(request.getParameter("address"), "");
-        String phone = ConvertUtil.safeToString(request.getParameter("phone"), "");
-        int sex = ConvertUtil.safeToInteger(request.getParameter("sex"), 0);
+        String domain = ConvertUtil.safeToString(request.getParameter("domain"), "");
+        String company = ConvertUtil.safeToString(request.getParameter("company"), "");
         int role = ConvertUtil.safeToInteger(request.getParameter("role_"), 0);
 
         User user = new User();
@@ -79,13 +78,12 @@ public class DoctorController {
             user.setCreatetime(new Date());
         }
         user.setName(name);
-        user.setUsername(username);
+        user.setUsername(username + "@" + domain);
         user.setEmail(email);
-        user.setAddress(address);
-        user.setGender(sex);
+        user.setDomain(domain);
         String pwd = MD5Util.string2MD5("111111" + user.getUsername());
         user.setPwd(pwd);
-        user.setPhone(phone);
+        user.setCompany(company);
         user.setRole(role);
         user.setState(1);
         userService.saveUser(user);
