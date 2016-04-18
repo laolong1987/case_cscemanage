@@ -29,12 +29,12 @@ public class User {
     private String specialty;
     @Column(name = "email")
     private String email;
-    @Column(name = "address")
-    private String address;
+    @Column(name = "domain")
+    private String domain;
     @Column(name = "position")
     private String position;
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "company")
+    private String company;
     @Column(name = "role")
     private int role;
     @Column(name = "state")
@@ -95,12 +95,12 @@ public class User {
         return this.email;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getDomain() {
+        return domain;
     }
 
-    public String getAddress() {
-        return this.address;
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
     public void setPosition(String position) {
@@ -111,12 +111,12 @@ public class User {
         return this.position;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String getCompany() {
+        return company;
     }
 
-    public String getPhone() {
-        return this.phone;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public void setRole(int role) {
