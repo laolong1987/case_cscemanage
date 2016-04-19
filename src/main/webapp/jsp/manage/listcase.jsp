@@ -57,9 +57,9 @@
                 {display : "邮箱", name : "email", type : "label"},
                 {display : "联系时间", name : "phonetime", type : "label"},
                 {display : "患者的情况和需求", name : "remark", type : "label"},
-                {display : "皇者当前大多治疗医生的姓名", name : "doctor_name", type : "label"},
-                {display : "皇者当前大多治疗医生所处的医院", name : "doctor_hospital", type : "label"},
-                {display : "皇者当前大多治疗医生的专科", name : "doctor_major", type : "label"},
+                {display : "患者当前的治疗医生的姓名", name : "doctor_name", type : "label"},
+                {display : "患者当前的多治疗医生所处的医院", name : "doctor_hospital", type : "label"},
+                {display : "患者当前的治疗医生的专科", name : "doctor_major", type : "label"},
                 {display : "当前的Case Manager", name : "username", type : "label"},
                 {display : "Note", name : "notecontent", type : "label"}
             ]
@@ -91,13 +91,20 @@
                     minWidth : 60
                 }, {
                     display : 'Country',
-                    name : 'country',
                     width : 80,
                     minWidth : 30,
-                    align : 'center'
+                    align : 'center',
+                    render: function (rowdata, rowindex, value)
+                    {
+                        if(null!=rowdata.country){
+                            return rowdata.country
+                        }else{
+                            return "中国"
+                        }
+                    }
                 },  {
                     display : 'City',
-                    name : 'city',
+                    name : 'province',
                     width : 80,
                     minWidth : 30,
                     align : 'center'
@@ -150,7 +157,7 @@
                     align : 'right',
                     render: function (rowdata, rowindex, value)
                     {
-                        var html1 = '<a href="#" onclick="showassign(2)">Assign</a> ';
+                        var html1 = '<a href="#" onclick="showassign(' + rowdata.id + ')">Assign</a> ';
                         var html2 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',4)">Complete</a> ';
                         var html3 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',3)">Cancel</a> ';
                         var html4 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',5)">Follow up</a> ';

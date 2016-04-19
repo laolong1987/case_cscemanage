@@ -40,25 +40,18 @@
             validate : true,
             fields : [
                 {name : "patientid", type : "hidden"},
-                {display : "登录名", name : "username", type : "text", group : "编辑", groupicon : icon,
+                {display : "userId", name : "username", type : "text", group : "编辑", groupicon : icon,
                     validate : {
                     required : true,
                     maxlength : 20
                 }},
-                {display : "姓名", name : "name", type : "text",newline : false,
+                {display : "name", name : "name", type : "text",newline : false,
                     validate : {
                         required : true,
                         maxlength : 20
                     }
-                },{	display : "性别",
-                    name : "sex",
-                    newline : true,
-                    type : "radiolist",
-                    editor : {
-                        data : [{"text":"男","id":0},{"text":"女","id":1}]
-                    },
                 },
-                {	display : "手机号",
+                {	display : "domain",
                     name : "phone1",
                     newline : true,
                     type : "text",
@@ -67,7 +60,7 @@
                         maxlength : 11
                     }
                 }, {
-                    display : "地址",
+                    display : "company",
                     name : "address",
                     newline : false,
                     type : "text",
@@ -76,7 +69,7 @@
                         maxlength : 500
                     }
                 }, {
-                    display : "邮件",
+                    display : "email",
                     name : "email",
                     newline : false,
                     type : "text",
@@ -103,48 +96,31 @@
                     }
                 },
                 {
-                    display : '姓名',
+                    display : 'name',
                     name : 'name',
                     align : 'center',
                     width : 100,
                     minWidth : 30
                 },{
-                    display : '登录名',
+                    display : 'userId',
                     name : 'username',
                     align : 'center',
                     width : 150,
                     minWidth : 60
                 }, {
-                    display : '手机号',
+                    display : 'domain',
                     name : 'phone1',
                     width : 100,
                     minWidth : 30,
                     align : 'center'
-                }, {
-                    display : '性别',
-                    name : 'sex',
-                    minWidth : 10,
-                    align : 'center',
-                    width : 50,
-                    render : function(rowdata, rowindex, value) {
-                        if(rowdata.sex==0){
-                            return "男"
-                        }else if(rowdata.sex==1){
-                            return "女";
-                        }else{
-                            return ""
-                        }
-
-                    }
-
                 },
                 {
-                    display : '地址',
+                    display : 'company',
                     name : 'address',
                     align : 'left'
                 },
                 {
-                    display : '邮箱',
+                    display : 'email',
                     name : 'email',
                     align : 'left'
                 }
