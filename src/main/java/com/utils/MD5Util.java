@@ -86,11 +86,12 @@ public class MD5Util {
 
 	// 测试主函数
 	public static void main(String args[]) {
-		String s = new String("gaoyang");
-		System.out.println("原始：" + s);
-		System.out.println("MD5后：" + string2MD5(s));
-		System.out.println("MD5(32大写)后：" + mmd5("D007I3"+"1429687846746"));
-
+//		String s = new String("gaoyang");
+//		System.out.println("原始：" + s);
+//		System.out.println("MD5后：" + string2MD5(s));
+//		System.out.println("MD5(32大写)后：" + mmd5("D007I3"+"1429687846746"));
+		String pwd = MD5Util.string2MD5("111111" + "admin");
+		System.out.println(pwd);
 //		System.out.println("加密的：" + convertMD5(s));
 //		System.out.println("解密的：" + convertMD5(convertMD5(s)));
 
