@@ -128,11 +128,11 @@
           name: 'position',
           align: 'center',
           render: function (rowdata) {
-            if (rowdata.role == 0) {
+            if (rowdata.role == 1) {
               return "enterprise admin"
-            } else if (rowdata.role == 1) {
-              return "case director";
             } else if (rowdata.role == 2) {
+              return "case director";
+            } else if (rowdata.role == 3) {
               return "case coordinator";
             } else {
               return "case manager"

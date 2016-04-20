@@ -130,6 +130,7 @@ public class CaseController {
             String user_email = request.getParameter("user_email");
             String user_time = request.getParameter("user_time");
             String info_details = request.getParameter("info_details");
+            String country = request.getParameter("country");
             String doctor_name = request.getParameter("doctor_name");
             String doctor_hospital = request.getParameter("doctor_hospital");
             String doctor_major = request.getParameter("doctor_major");
@@ -155,7 +156,7 @@ public class CaseController {
             caseManage.setDoctor_name(doctor_name);
             caseManage.setDoctor_major(doctor_major);
             caseManage.setCreatetime(new Date());
-
+            caseManage.setCountry(country);
             caseService.save(caseManage);
             return "ok";
         }catch(Exception e){
