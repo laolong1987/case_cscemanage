@@ -62,7 +62,7 @@ public class DoctorController {
     @ResponseBody
     public String adduser(HttpServletRequest request,
                           HttpServletResponse response) {
-        int patientid = ConvertUtil.safeToInteger(request.getParameter("patientid"), 0);
+        int keyid = ConvertUtil.safeToInteger(request.getParameter("keyid"), 0);
         String name = ConvertUtil.safeToString(request.getParameter("name"), "");
         String username = ConvertUtil.safeToString(request.getParameter("username"), "");
 //        String email = ConvertUtil.safeToString(request.getParameter("email"), "");
@@ -73,16 +73,23 @@ public class DoctorController {
         int role = ConvertUtil.safeToInteger(request.getParameter("role_"), 0);
 
         User user = new User();
-        if (0 != patientid) {
-            user = userService.getUserById(patientid);
+        if (0 != keyid) {
+            user = userService.getUserById(keyid);
             user.setUpdatetime(new Date());
         } else {
             user.setCreatetime(new Date());
         }
         user.setName(name);
-        user.setUsername(username + "@" + domain);
-        user.setEmail(username + "@" + domain);
+        if(!username.contains("@")){
+            user.setUsername(username + "@" + domain);
+            user.setEmail(username + "@" + domain);
+
+        }else{
+            user.setUsername(username);
+            user.setEmail(username);
+        }
         user.setDomain(domain);
+
         String pwd = MD5Util.string2MD5("111111" + user.getUsername());
         user.setPwd(pwd);
         user.setCompany(company);

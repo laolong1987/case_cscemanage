@@ -40,6 +40,7 @@
       space: 45,
       validate: true,
       fields: [
+        {name : "keyid", type : "hidden"},
         {
           display: "userId",
           name: "username",
@@ -48,7 +49,7 @@
           groupicon: icon,
           validate: {
             required: true,
-            maxlength: 20
+            maxlength: 200
           }
         },
         {
@@ -200,13 +201,10 @@
     showWindow();
 
     saveForm.setData({
-      patientid: data.id,
+      keyid: data.id,
       name: data.name,
       username: data.username,
-      phone1: data.phone1,
-      email: data.email,
-      address: data.address,
-      sex: data.sex
+      role_:data.role,
     });
 
   }
@@ -371,11 +369,6 @@
     <div class="l-panel-search-item">姓名</div>
     <div class="l-panel-search-item">
       <input type="text" id="queryname" name="queryname" class="liger-textbox"/>
-    </div>
-    <div class="l-panel-search-item">手机号</div>
-    <div class="l-panel-search-item">
-      <input type="text" id="queryphone1" name="queryphone1"
-             class="liger-textbox"/>
     </div>
     <div class="l-panel-search-item">
       <input type="button" id="searchbtn" value="查询"/>
