@@ -40,7 +40,6 @@
       space: 45,
       validate: true,
       fields: [
-        {name: "patientid", type: "hidden"},
         {
           display: "userId",
           name: "username",
@@ -51,13 +50,6 @@
             required: true,
             maxlength: 20
           }
-        }, {
-          display: "domain",
-          name: "domain",
-          type: "text",
-          validate: {
-            required: true,
-          }
         },
         {
           display: "name", name: "name", type: "text", newline: false,
@@ -66,12 +58,31 @@
             maxlength: 20
           }
         },
-        {
-          display: "company",
-          name: "company",
-          newline: true,
-          type: "text"
-        },
+        /*
+         {
+         name: "company",
+         newline: true,
+         type: "hidden"
+         },
+         {
+         display: "email",
+         name: "email",
+         newline: false,
+         type: "text",
+         validate: {
+         required: true,
+         maxlength: 500
+         }
+         },
+         {
+         display: "domain",
+         name: "domain",
+         type: "text",
+         validate: {
+         required: true,
+         }
+         },
+         */
         {
           display: "role",
           name: "role_",
@@ -83,17 +94,8 @@
           validate: {
             required: true,
           }
-        },
-        {
-          display: "email",
-          name: "email",
-          newline: false,
-          type: "text",
-          validate: {
-            required: true,
-            maxlength: 500
-          }
-        }]
+        }
+      ]
     });
   }
   function setGrid() {

@@ -52,6 +52,7 @@ public class AdminController {
                 request.getSession().setAttribute("user", admin);
                 return "redirect:index";
             } else {
+                request.setAttribute("tip","用户名或密码错误");
                 return "/jsp/manage/login";
             }
         }

@@ -81,8 +81,8 @@
 
         function iniMenu(){
             var data = [];
-            data.push({ id: 1, value: '${ctx}/case/showlist', text: 'Case Admin' });
-            data.push({ id: 3, value: '${ctx}/doctor/showlist', text: 'Staff' });
+            data.push({ id: 1, value: '${ctx}/case/showlist', text: 'Case' });
+            data.push({ id: 3, value: '${ctx}/doctor/showlist', text: 'Manage' });
             data.push({ id: 4, value: '${ctx}/patient/showlist', text: 'Customer' });
             var tree = $("#tree").ligerTree({
                 data:data,
@@ -307,7 +307,7 @@
         $(function () {
 
                 //这里是在鼠标经过时才显示，没有传入参数，或者传入的参数列表有 auto:true这个参数/值
-            $("#message1").ligerTip({ content: "未处理消息", width: 74  });
+            $("#message1").ligerTip({ content: "<a href=''>未处理消息</a>", width: 74  });
 
             });
     </script>
