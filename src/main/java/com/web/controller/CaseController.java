@@ -1,11 +1,13 @@
 package com.web.controller;
 
 import com.utils.ConvertUtil;
+import com.utils.mail.SentEmailUtils;
 import com.web.entity.CaseManage;
 import com.web.entity.Patient;
 import com.web.entity.User;
 import com.web.service.CaseService;
 import com.web.service.PatientService;
+import com.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +34,9 @@ public class CaseController {
 
     @Autowired
     CaseService caseService;
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/showlist")
     public String showlist(HttpServletRequest request,
@@ -72,7 +77,7 @@ public class CaseController {
     @RequestMapping(value = "/updateuserid",method = RequestMethod.POST)
     @ResponseBody
     public Object updateuserid(HttpServletRequest request,
-                               HttpServletResponse response) {
+                               HttpServletResponse response) throws Exception {
         int id = ConvertUtil.safeToInteger(request.getParameter("id"), 0);
         int userid = ConvertUtil.safeToInteger(request.getParameter("userid"), 0);
         if (0 != id) {
@@ -80,6 +85,12 @@ public class CaseController {
             caseManage.setUserid(userid);
             caseManage.setStatus(2);
             caseService.saveCase(caseManage);
+
+            User user= userService.getUserById(userid);
+            if(null!=user){
+                SentEmailUtils.sentEmailNullFile(user.getEmail(),user.getName());
+
+            }
         }
         return "success";
     }

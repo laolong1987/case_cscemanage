@@ -285,10 +285,6 @@
         <div class="l-panel-search-item">
             <input type="text" id="queryname" name="queryname"  class="liger-textbox" />
         </div>
-        <div class="l-panel-search-item">手机号</div>
-        <div class="l-panel-search-item">
-            <input type="text" id="queryphone1" name="queryphone1"  class="liger-textbox" />
-        </div>
         <div class="l-panel-search-item">
             <input type="button" id="searchbtn" value="查询" />
         </div>
