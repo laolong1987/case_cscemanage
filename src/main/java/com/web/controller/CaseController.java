@@ -3,6 +3,7 @@ package com.web.controller;
 import com.utils.ConvertUtil;
 import com.web.entity.CaseManage;
 import com.web.entity.Patient;
+import com.web.entity.User;
 import com.web.service.CaseService;
 import com.web.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,16 @@ public class CaseController {
 
     @RequestMapping(value = "/searchlist", method = RequestMethod.POST)
     @ResponseBody
-    public Object searchlist(@RequestBody Map<String, String> param) {
+    public Object searchlist(@RequestBody Map<String, String> param,HttpServletRequest request) {
 
+        User user= (User)request.getSession().getAttribute("user");
+        int role=0;
+        if(null!=user){
+            role=user.getRole();
+        }
+        if(4==role){
+            param.put("userid",ConvertUtil.safeToString(user.getId(),""));
+        }
         return caseService.searchCase(param).getResult();
     }
 

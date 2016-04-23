@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.web.entity.User" %>
 <%@ include file="head.jsp"%>
 <html>
 <head>
@@ -22,7 +23,7 @@
     var typeData = null;
     var icon = '${ctx}/ligerUI/skins/icons/pager.gif';
     var condition = { fields: [{ name: 'name', label: 'name',width:90,type:'text' }] };
-
+    var role=null;
     $(function() {
         $("#searchbtn").ligerButton({
             click : function() {
@@ -30,6 +31,14 @@
             }
         });
 
+        <%
+        User user= (User)request.getSession().getAttribute("user");
+        int role =0;
+        if(null!=user){
+          role=user.getRole();
+        }
+        %>
+        role='<%=role%>';
         setGrid();
         initSaveForm();
 
@@ -83,12 +92,12 @@
                     display : 'Name',
                     name : 'name',
                     align : 'center',
-                    minWidth : 60
+                    width : 100
                 }, {
                     display : 'Case Manager',
                     name : 'username',
                     align : 'center',
-                    minWidth : 60
+                    width : 100,
                 }, {
                     display : 'Country',
                     width : 80,
@@ -161,18 +170,45 @@
                         var html2 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',4)">Complete</a> ';
                         var html3 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',3)">Cancel</a> ';
                         var html4 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',5)">Follow up</a> ';
-                        return html1+html2+html3+html4;
+
+                        if(1==role){
+                            return html1+html2+html3+html4;
+                        }else if(2==role){
+                            return html1+html2+html3+html4;
+                        }else if(3==role){
+                            return ""
+                        }else if(4==role){
+                            return ""
+                        }else{
+                            return "";
+                        }
                         <%--return "<img title='action' onclick='editColumn("+JSON.stringify(rowdata)+");' style='margin-top:5px;cursor:pointer;' src='${ctx}/ligerUI/skins/icons/editform.png'/>&nbsp;&nbsp;&nbsp;";--%>
                     }
                 },{
                     display: 'note',
-                    isSort: false,
-                    isExport: false,
-                    width: 40,
-                    align : 'right',
+                    align : 'left',
+                    width: 400,
                     render: function (rowdata, rowindex, value)
                     {
-                        return "<img title='note' onclick='shownote("+JSON.stringify(rowdata)+");' style='margin-top:5px;cursor:pointer;' src='${ctx}/ligerUI/skins/icons/editform.png'/>&nbsp;&nbsp;&nbsp;";
+                        var a="Click me to type note";
+                        if(null!=rowdata.note){
+                            a = rowdata.note;
+                        }
+                        var html = "<a href='#' onclick='shownote("+JSON.stringify(rowdata)+")' >"+a+ "</a>";
+
+                        if(1==role){
+                            return html;
+                        }else if(2==role){
+                            return html;
+                        }else if(3==role){
+                            return html
+                        }else if(4==role){
+                            return ""
+                        }else{
+                            return "";
+                        }
+
+                        <%--return "<img title='note' onclick='shownote("+JSON.stringify(rowdata)+");' style='margin-top:5px;cursor:pointer;' src='${ctx}/ligerUI/skins/icons/editform.png'/>&nbsp;&nbsp;&nbsp;";--%>
                     }
                 }
             ],

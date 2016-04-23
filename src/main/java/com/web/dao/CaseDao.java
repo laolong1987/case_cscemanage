@@ -21,6 +21,7 @@ public class CaseDao extends BaseDao{
      */
     public SearchTemplate searchCase(Map map){
         StringBuffer sql =new StringBuffer();
+        Map p=new HashMap();
         sql.append("select  a.id,a.name,a.type,a.status,a.city,a.country,c.name as username,a.note, ");
         sql.append("case(a.type) when '1' then 'Expert Medical Report' ");
         sql.append("when '2' then 'Personal Healthy Advisory' ");
@@ -34,8 +35,19 @@ public class CaseDao extends BaseDao{
         sql.append("left join patient b on a.createempid=b.id  ");
         sql.append("left join medical.user c on a.userid=c.id  ");
         sql.append("where 1=1 ");
+        if (map.containsKey("queryname")){
+            sql.append(" and a.name like :queryname ");
+            p.put("queryname", "%" + map.get("queryname") + "%");
+        }
+        if (map.containsKey("queryphone1")){
+            sql.append(" and a.phone1 like :queryphone1 ");
+            p.put("queryphone1", "%" + map.get("queryphone1") + "%");
+        }
+        if (map.containsKey("userid")){
+            sql.append(" and a.userid =:userid ");
+            p.put("userid",map.get("userid"));
+        }
         sql.append("order by a.createtime desc   ");
-        Map p=new HashMap();
         return super.search(sql.toString(),p);
     }
 }
