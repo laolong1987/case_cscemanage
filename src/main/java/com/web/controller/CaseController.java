@@ -88,7 +88,7 @@ public class CaseController {
 
             User user= userService.getUserById(userid);
             if(null!=user){
-                SentEmailUtils.sentEmailNullFile(user.getEmail(),user.getName());
+                SentEmailUtils.sentEmailNullFile(user.getEmail(),user.getName(),caseManage);
 
             }
         }
