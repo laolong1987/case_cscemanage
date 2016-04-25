@@ -47,7 +47,7 @@
     function initSaveForm(){
         saveForm = $("#saveForm").ligerForm({
             inputWidth : 170,
-            labelWidth : 100,
+            labelWidth : 200,
             space : 45,
             validate : true,
             fields : [
@@ -229,6 +229,7 @@
 
         saveForm.setData({
             address: data.address,
+            createtime: data.createtime,
             name: data.name,
             city : data.city,
             country : data.country,
@@ -268,7 +269,7 @@
         if (saveWindow == null) {
             saveWindow = $.ligerDialog.open({
                 target : $("#addWindow"),
-                width : 400,
+                width : 600,
                 height : 'auto',
                 isResize : true
             });
@@ -559,7 +560,7 @@
 
 <div id="noteWindow" style="width:99%; margin:3px; display:none;">
     <div class="l-dialog-body" style="width: 100%;">
-        <textarea cols="100" rows="4" class="l-textarea"  id="note" name="note"></textarea>
+        <textarea cols="100" rows="15" class="l-textarea"  style="width: 99%" id="note" name="note"></textarea>
         <input type="hidden" id="upnoteid" name="upnoteid" />
         <div class="l-dialog-buttons">
             <div class="l-dialog-buttons-inner">
