@@ -3,6 +3,7 @@ package com.web.dao;
 
 import com.common.BaseDao;
 import com.common.SearchTemplate;
+import com.utils.ConvertUtil;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -42,6 +43,22 @@ public class CaseDao extends BaseDao{
         if (map.containsKey("queryphone1")){
             sql.append(" and a.phone1 like :queryphone1 ");
             p.put("queryphone1", "%" + map.get("queryphone1") + "%");
+        }
+        if (map.containsKey("querycountry")){
+            sql.append(" and a.country like :querycountry ");
+            p.put("querycountry", "%" + map.get("querycountry") + "%");
+        }
+        if (map.containsKey("querycity")){
+            sql.append(" and a.province like :querycity ");
+            p.put("querycity", "%" + map.get("querycity") + "%");
+        }
+        if (map.containsKey("querystatus") && 0!= ConvertUtil.safeToInteger(map.get("querystatus"),0)){
+            sql.append(" and a.status =:querystatus ");
+            p.put("querystatus", map.get("querystatus"));
+        }
+        if (map.containsKey("queryservicetype") && 0!= ConvertUtil.safeToInteger(map.get("queryservicetype"),0)){
+            sql.append(" and a.type = :queryservicetype ");
+            p.put("queryservicetype", map.get("queryservicetype"));
         }
         if (map.containsKey("userid")){
             sql.append(" and a.userid =:userid ");

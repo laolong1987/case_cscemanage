@@ -168,8 +168,8 @@
                     {
                         var html1 = '<a href="#" onclick="showassign(' + rowdata.id + ')">Assign</a> ';
                         var html2 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',4)">Complete</a> ';
-                        var html3 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',3)">Cancel</a> ';
-                        var html4 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',5)">Follow up</a> ';
+                        var html3 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',5)">Follow up</a> ';
+                        var html4 = '<a href="#" onclick="updatestatus(' + rowdata.id + ',3)">Cancel</a>';
 
                         if(1==role){
                             return html1+html2+html3+html4;
@@ -498,16 +498,42 @@
 <div class="l-loading" style="display:block" id="pageloading"></div>
 <form id="queryForm">
     <div class="l-panel-search">
-        <div class="l-panel-search-item">姓名</div>
+        <div class="l-panel-search-item">name</div>
         <div class="l-panel-search-item">
             <input type="text" id="queryname" name="queryname"  class="liger-textbox" />
         </div>
-        <div class="l-panel-search-item">手机号</div>
+        <div class="l-panel-search-item">country</div>
         <div class="l-panel-search-item">
-            <input type="text" id="queryphone1" name="queryphone1"  class="liger-textbox" />
+            <input type="text" id="querycountry" name="querycountry"  class="liger-textbox" />
+        </div>
+        <div class="l-panel-search-item">city</div>
+        <div class="l-panel-search-item">
+            <input type="text" id="querycity" name="querycity"  class="liger-textbox" />
+        </div>
+        <div class="l-panel-search-item">service type</div>
+        <div class="l-panel-search-item">
+            <select name="queryservicetype" id="queryservicetype" >
+                <option value="0">All</option>
+                <option value="1">Expert Medical Report</option>
+                <option value="2">Personal Healthy Advisory</option>
+                <option value="3">Stress Management</option>
+                <option value="4">Oientation And Navigation</option>
+            </select>
+
+        </div>
+        <div class="l-panel-search-item">status</div>
+        <div class="l-panel-search-item">
+            <select name="querystatus" id="querystatus" >
+                <option value="0">All</option>
+                <option value="1">Pending</option>
+                <option value="2">Assigned</option>
+                <option value="3">Canceled</option>
+                <option value="4">Completeed</option>
+                <option value="5">Followed</option>
+            </select>
         </div>
         <div class="l-panel-search-item">
-            <input type="button" id="searchbtn" value="查询" />
+            <input type="button" id="searchbtn" value="search" />
         </div>
     </div>
 </form>
