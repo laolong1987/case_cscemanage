@@ -37,10 +37,10 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-        public String login() {
-            return "/jsp/manage/login";
-        }
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "/jsp/manage/login";
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(User user, HttpServletRequest request) {
@@ -52,7 +52,7 @@ public class AdminController {
                 request.getSession().setAttribute("user", admin);
                 return "redirect:index";
             } else {
-                request.setAttribute("tip","用户名或密码错误");
+                request.setAttribute("tip", "用户名或密码错误");
                 return "/jsp/manage/login";
             }
         }
@@ -65,6 +65,22 @@ public class AdminController {
     public String index(HttpServletRequest request,
                         HttpServletResponse response) {
         return "/jsp/manage/index";
+    }
+
+    /**
+     * 退出清空session
+     *
+     * @param request
+     * @param response
+     *
+     * @return
+     */
+    @RequestMapping(value = "/logout")
+    public String removeuser(HttpServletRequest request,
+                             HttpServletResponse response) {
+        request.getSession().removeAttribute("user");
+        return "/jsp/manage/login";
+
     }
 
 }
