@@ -151,7 +151,7 @@
                         }else if(rowdata.status==3){
                             return "Canceled";
                         }else if(rowdata.status==4){
-                            return "Completeed";
+                            return "Completed";
                         }else if(rowdata.status==5){
                             return "Followed";
                         }else{
