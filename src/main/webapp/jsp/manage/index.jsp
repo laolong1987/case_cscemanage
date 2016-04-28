@@ -81,9 +81,9 @@
 
         function iniMenu(){
             var data = [];
-            data.push({ id: 1, value: '${ctx}/case/showlist', text: 'Case' });
-            data.push({ id: 3, value: '${ctx}/doctor/showlist', text: 'Manage' });
-            data.push({ id: 4, value: '${ctx}/patient/showlist', text: 'Customer' });
+            data.push({ id: 1, value: '${ctx}/case/showlist', text: 'Cases' });
+            data.push({ id: 3, value: '${ctx}/doctor/showlist', text: 'Manages' });
+            data.push({ id: 4, value: '${ctx}/patient/showlist', text: 'Customers' });
             var tree = $("#tree").ligerTree({
                 data:data,
                 nodeWidth : 120,
@@ -629,9 +629,11 @@
             <img src="/images/changepassword.png" onmouseover="this.style.cursor='pointer'" onclick="openPwd();" title="修改密码">
              -->
         </div>
+        <!--
         <div id="message1" class="message" style="right: 260px;position: absolute;font: 16px Microsoft Yahei; top: 24px" ligertipid="Tip1000"  title="您有78条消息未处理">
             78
         </div>
+         -->
         <div style=" color: #4a4a4a;font: 16px Microsoft Yahei;right: 80px;position: absolute;top: 24px;">你好,${user.name}</div>
         <div class="weizhi"></div>
     </div>
@@ -642,7 +644,7 @@
 
     </div>
     <div position="center" id="framecenter">
-        <div tabid="home" title="我的主页" style="height:300px">
+        <div tabid="home" title="Cases" style="height:300px">
             <iframe frameborder="0" name="home" id="home" src="${ctx}/case/showlist"></iframe>
         </div>
     </div>

@@ -53,10 +53,10 @@ public class SentEmailUtils {
         mailInfo.setSubject("Advance Medical Info");
         StringBuffer content = new StringBuffer();
         content.append("<p >Dear " + username + ":</p>");
-        content.append("<p >We have recevied an online enrollment from one of ");
-        content.append("our Chinese client employee through out patient portal.");
-        content.append(" Could you please look at the following add confirm within ");
-        content.append("the next 2-3 hours whether or not you can take on this case today? Thank you.").append("</p><p></p>");
+        content.append("<p >We have received an online enrollment form from one of ");
+        content.append(" our Chinese client employees through our patient portal.");
+        content.append("   Could you please look at the following and confirm within ");
+        content.append("the next 2-3 hours whether or not you can take on this case today?  Thank you.").append("</p><p></p>");
         content.append("服务类型：");
         if (caseManage.getType() == 1) {
             content.append("Expert Medical Report");
@@ -108,7 +108,9 @@ public class SentEmailUtils {
         content.append("主治：").append(caseManage.getDoctor_major());
         content.append("<br>");
         content.append("<br>");
-        content.append("Best Regards" ).append("Timothy Foggin, M.D.");
+        content.append("Best Regards" );
+        content.append("<br>");
+        content.append("Timothy Foggin, M.D.");
 
         mailInfo.setContent(content.toString());
         SimpleMailSender sms = new SimpleMailSender();
