@@ -61,6 +61,29 @@ public class AdminController {
     }
 
 
+    @RequestMapping(value = "/savepassword", method = RequestMethod.POST)
+    @ResponseBody
+    public String save_password( HttpServletRequest request,HttpServletResponse response) {
+        String result="";
+        User user= (User) request.getSession().getAttribute("user");
+        String password = request.getParameter("password");
+        String confirmPwd =request.getParameter("confirmPwd");
+        if( !"".equals(confirmPwd) && !"".equals(password) && password!=null && confirmPwd!=null ){
+            if(password.equals(confirmPwd)){
+                String pwd = MD5Util.string2MD5(password + user.getUsername());
+                user.setPwd(pwd);
+                userService.saveUser(user);
+                result="success";
+            }else{
+                result="The passwords you typed do not match. Type the same password in both text boxes.";
+            }
+        }else{
+            result="password can't be null";
+        }
+        return result;
+    }
+
+
     @RequestMapping(value = "/index")
     public String index(HttpServletRequest request,
                         HttpServletResponse response) {
@@ -79,8 +102,7 @@ public class AdminController {
     public String removeuser(HttpServletRequest request,
                              HttpServletResponse response) {
         request.getSession().removeAttribute("user");
-        return "/jsp/manage/login";
-
+        return "redirect:/admin/login";
     }
 
 }

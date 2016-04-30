@@ -111,6 +111,8 @@ public class SentEmailUtils {
         content.append("Best Regards" );
         content.append("<br>");
         content.append("Timothy Foggin, M.D.");
+        content.append("<br>");
+        content.append("Medical Director (Asia Pacific) | 国际医疗总监 advance | medical");
 
         mailInfo.setContent(content.toString());
         SimpleMailSender sms = new SimpleMailSender();
