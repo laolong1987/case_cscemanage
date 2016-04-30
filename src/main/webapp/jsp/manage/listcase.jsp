@@ -163,7 +163,7 @@
                     isSort: false,
                     isExport: false,
                     width: 200,
-                    align : 'right',
+                    align : 'left',
                     render: function (rowdata, rowindex, value)
                     {
                         var html1 = '<a href="#" onclick="showassign(' + rowdata.id + ')">Assign</a> ';
