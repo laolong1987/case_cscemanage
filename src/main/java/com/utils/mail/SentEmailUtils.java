@@ -58,7 +58,7 @@ public class SentEmailUtils {
         content.append(" our Chinese client employees through our patient portal.");
         content.append("   Could you please look at the following and confirm within ");
         content.append("the next 2-3 hours whether or not you can take on this case today?  Thank you.").append("</p><p></p>");
-        content.append("服务类型：");
+        content.append("服务类型(service type)：");
         if (caseManage.getType() == 1) {
             content.append("Expert Medical Report");
         } else if (caseManage.getType() == 2) {
@@ -69,44 +69,44 @@ public class SentEmailUtils {
             content.append(" Oientation And Navigation");
         }
         content.append("<br>");
-        content.append("case创建时间:").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(caseManage.getCreatetime()));
+        content.append("case创建时间(time created):").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(caseManage.getCreatetime()));
         content.append("<br>");
-        content.append("患者姓名：").append(caseManage.getName());
+        content.append("患者姓名(patient name)：").append(caseManage.getName());
         content.append("<br>");
-        content.append("性别：");
+        content.append("性别(gender)：");
         if (caseManage.getSex() == 0) {
             content.append("男");
         } else {
             content.append("女");
         }
         content.append("<br>");
-        content.append("申请人与患者关系：").append(caseManage.getRelation());
+        content.append("申请人与患者关系(relationship to patient)：").append(caseManage.getRelation());
         content.append("<br>");
-        content.append("申请人姓名：").append(caseManage.getCreatename());
+        content.append("申请人姓名(applier name)：").append(caseManage.getCreatename());
         content.append("<br>");
-        content.append("国家：").append(caseManage.getCountry());
+        content.append("国家(country)：").append(caseManage.getCountry());
         content.append("<br>");
-        content.append("省：").append(caseManage.getProvince());
+        content.append("省(province)：").append(caseManage.getProvince());
         content.append("<br>");
-        content.append("城市：").append(caseManage.getCity());
+        content.append("城市(city)：").append(caseManage.getCity());
         content.append("<br>");
-        content.append("详细地址：").append(caseManage.getAddress());
+        content.append("详细地址(detailed address)：").append(caseManage.getAddress());
         content.append("<br>");
-        content.append("首选电话：").append(caseManage.getPhone1());
+        content.append("首选电话(phone)：").append(caseManage.getPhone1());
         content.append("<br>");
-        content.append("备选电话：").append(caseManage.getPhone2());
+        content.append("备选电话(secondary phone)：").append(caseManage.getPhone2());
         content.append("<br>");
-        content.append("邮箱：").append(caseManage.getEmail());
+        content.append("邮箱(email)：").append(caseManage.getEmail());
         content.append("<br>");
-        content.append("联系时间：").append(caseManage.getPhonetime());
+        content.append("联系时间(preferred contact time)：").append(caseManage.getPhonetime());
         content.append("<br>");
-        content.append("患者情况和需求：<br><div style='margin-left:20px'>").append(caseManage.getRemark()).append("</div>");
+        content.append("患者情况和需求(patient description and request)：<br><div style='margin-left:20px'>").append(caseManage.getRemark()).append("</div>");
         content.append("<br>");
-        content.append("医生姓名：").append(caseManage.getDoctor_name());
+        content.append("医生姓名(current physician)：").append(caseManage.getDoctor_name());
         content.append("<br>");
-        content.append("医生所在医院：").append(caseManage.getDoctor_hospital());
+        content.append("医生所在医院(hospital)：").append(caseManage.getDoctor_hospital());
         content.append("<br>");
-        content.append("主治：").append(caseManage.getDoctor_major());
+        content.append("主治(specialty)：").append(caseManage.getDoctor_major());
         content.append("<br>");
         content.append("<br>");
         content.append("Best Regards" );
