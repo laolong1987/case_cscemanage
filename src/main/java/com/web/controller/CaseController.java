@@ -186,4 +186,15 @@ public class CaseController {
 
     }
 
+    @RequestMapping(value = "/remove",method = RequestMethod.POST)
+    @ResponseBody
+    public Object removeEnum(@RequestBody List<Map> params){
+        List<Integer> ids = new ArrayList<Integer>();
+        for (Map map : params) {
+            ids.add(Integer.parseInt(map.get("id").toString()));
+        }
+        caseService.removeCase(ids);
+        return "success";
+    }
+
 }

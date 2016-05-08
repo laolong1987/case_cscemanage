@@ -66,6 +66,8 @@ public class CaseDao extends BaseDao{
         }
         sql.append("order by a.createtime desc   ");
 //        sql.append("order by FIELD(a.status,'3') asc, a.createtime desc   ");
+        p.put("pageSize",map.get("pageSize"));
+        p.put("page",map.get("page"));
         return super.search(sql.toString(),p);
     }
 }

@@ -39,4 +39,9 @@ public class CaseService extends BaseDao {
         return (CaseManage) caseDao.getObjectById(id,CaseManage.class);
     }
 
+    public void removeCase(List<Integer> ids) {
+        StringBuffer sql = new StringBuffer("delete from CaseManage where id in(:ids)");
+        caseDao.removeByIds(sql.toString(), ids);
+    }
+
 }

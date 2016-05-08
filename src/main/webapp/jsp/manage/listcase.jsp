@@ -212,12 +212,27 @@
                     }
                 }
             ],
-            pageSize : 15,
+            pageSize : 20,
+            pageSizeOptions:[10,20,30,40,50],
             url : "${ctx}/case/searchlist",
             rownumbers : true,
             checkbox : true,
             selectRowButtonOnly : true,
             isScroll : true
+            <%
+              if(1==role || 2==role){
+              %>
+            ,toolbar: {
+                items: [{
+                    id: 'delete',
+                    text: '删除',
+                    click: itemclick,
+                    img: '${ctx}/ligerUI/skins/icons/busy.gif'
+                }]
+            }
+            <%
+              }
+            %>
         });
     }
 
