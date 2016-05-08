@@ -23,18 +23,22 @@ public class UserDao extends BaseDao {
         return super.findObjects(sql.toString(), user);
     }
 
-    public SearchTemplate searchUser(Map map){
-         StringBuffer sql =new StringBuffer();
-         sql.append("select * from user where 1=1");
-         Map p=new HashMap();
-         if (map.containsKey("queryname")){
-             sql.append(" and name like :queryname");
-             p.put("queryname", "%" + map.get("queryname") + "%");
-         }
-         if (map.containsKey("queryphone1")){
-             sql.append(" and phone1 like :queryphone1");
-             p.put("queryphone1", "%" + map.get("queryphone1") + "%");
-         }
-         return super.search(sql.toString(), p);
-     }
+    public SearchTemplate searchUser(Map map) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("select * from user where 1=1");
+        Map p = new HashMap();
+        if (map.containsKey("queryname")) {
+            sql.append(" and name like :queryname");
+            p.put("queryname", "%" + map.get("queryname") + "%");
+        }
+        if (map.containsKey("queryphone1")) {
+            sql.append(" and phone1 like :queryphone1");
+            p.put("queryphone1", "%" + map.get("queryphone1") + "%");
+        }
+        if (map.containsKey("role")) {
+            sql.append(" and role > :role");
+            p.put("role",  map.get("role") );
+        }
+        return super.search(sql.toString(), p);
+    }
 }

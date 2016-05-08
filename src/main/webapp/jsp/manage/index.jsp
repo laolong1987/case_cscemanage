@@ -79,8 +79,10 @@
     function iniMenu() {
       var data = [];
       data.push({id: 1, value: '${ctx}/case/showlist', text: 'Cases'});
+      <c:if test="${user.role !=4}">
       data.push({id: 3, value: '${ctx}/doctor/showlist', text: 'Manages'});
       data.push({id: 4, value: '${ctx}/patient/showlist', text: 'Customers'});
+      </c:if>
       var tree = $("#tree").ligerTree({
         data: data,
         nodeWidth: 120,
