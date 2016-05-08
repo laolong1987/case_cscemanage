@@ -125,7 +125,7 @@
                     align : 'left'
                 }
             ],
-            pageSize : 15,
+            pageSize : 50,
             url : "${ctx}/patient/searchlist",
             rownumbers : true,
             checkbox : true,

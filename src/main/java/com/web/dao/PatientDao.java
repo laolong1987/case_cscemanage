@@ -37,6 +37,8 @@ public class PatientDao extends BaseDao{
             sql.append(" and phone1 like :queryphone1");
             p.put("queryphone1", "%" + map.get("queryphone1") + "%");
         }
+        p.put("pageSize",map.get("pageSize"));
+        p.put("page",map.get("page"));
         return super.search(sql.toString(),p);
     }
 }
