@@ -41,8 +41,9 @@ public class DoctorController {
 
     @RequestMapping(value = "/searchlist", method = RequestMethod.POST)
     @ResponseBody
-    public Object searchlist(@RequestBody Map<String, String> param) {
-
+    public Object searchlist(@RequestBody Map<String, String> param, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        param.put("role",String.valueOf(user.getRole()));
         return userService.searchUserList(param).getResult();
     }
 
@@ -68,8 +69,8 @@ public class DoctorController {
 //        String email = ConvertUtil.safeToString(request.getParameter("email"), "");
 //        String domain = ConvertUtil.safeToString(request.getParameter("domain"), "");
 //        String company = ConvertUtil.safeToString(request.getParameter("company"), "");
-        String domain="advance-medical.com.cn";
-        String company="Advance Medical";
+        String domain = "advance-medical.com.cn";
+        String company = "Advance Medical";
         int role = ConvertUtil.safeToInteger(request.getParameter("role_"), 0);
 
         User user = new User();
@@ -80,11 +81,11 @@ public class DoctorController {
             user.setCreatetime(new Date());
         }
         user.setName(name);
-        if(!username.contains("@")){
+        if (!username.contains("@")) {
             user.setUsername(username + "@" + domain);
             user.setEmail(username + "@" + domain);
 
-        }else{
+        } else {
             user.setUsername(username);
             user.setEmail(username);
         }
@@ -102,7 +103,7 @@ public class DoctorController {
     @RequestMapping(value = "/resetpwd", method = RequestMethod.POST)
     @ResponseBody
     public String reSetPwd(HttpServletRequest request, HttpServletResponse response) {
-        try{
+        try {
             int id = Integer.parseInt(request.getParameter("id"));
             User user = userService.getUserById(id);
             String pwd = MD5Util.string2MD5("111111" + user.getUsername());
@@ -110,23 +111,24 @@ public class DoctorController {
             user.setUpdatetime(new Date());
             userService.saveUser(user);
             return "success";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "failure";
         }
     }
-    @RequestMapping(value = "/resetstate", method = RequestMethod.POST)
-       @ResponseBody
-       public String reSetState(HttpServletRequest request, HttpServletResponse response) {
-           try{
-               int id = Integer.parseInt(request.getParameter("id"));
-               int state = Integer.parseInt(request.getParameter("state"));
-               User user = userService.getUserById(id);
-               user.setState(state);
-               userService.saveUser(user);
-               return "success";
-           }catch (Exception e){
-               return "failure";
-           }
 
-       }
+    @RequestMapping(value = "/resetstate", method = RequestMethod.POST)
+    @ResponseBody
+    public String reSetState(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            int state = Integer.parseInt(request.getParameter("state"));
+            User user = userService.getUserById(id);
+            user.setState(state);
+            userService.saveUser(user);
+            return "success";
+        } catch (Exception e) {
+            return "failure";
+        }
+
+    }
 }
