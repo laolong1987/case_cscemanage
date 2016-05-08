@@ -64,7 +64,8 @@ public class CaseDao extends BaseDao{
             sql.append(" and a.userid =:userid ");
             p.put("userid",map.get("userid"));
         }
-        sql.append("order by FIELD(a.status,'3') asc, a.createtime desc   ");
+        sql.append("order by a.createtime desc   ");
+//        sql.append("order by FIELD(a.status,'3') asc, a.createtime desc   ");
         return super.search(sql.toString(),p);
     }
 }

@@ -55,8 +55,8 @@
                 {display : "开case时间", name : "createtime", type : "label"},
                 {display : "患者姓名", name : "name", type : "label",newline :true},
                 {display : "性别", name : "sexname", type : "label"},
-                {display : "申请人与患者关系", name : "relation", type : "label"},
-                {display : "申请人姓名", name : "createname", type : "label"},
+                {display : "申请人与患者关系(relationship to patient)", name : "relation", type : "label"},
+                {display : "申请人姓名(applier name)", name : "createname", type : "label"},
                 {display : "国家", name : "country", type : "label"},
                 {display : "省", name : "province", type : "label"},
                 {display : "城市", name : "city", type : "label"},
@@ -125,13 +125,13 @@
                     width : 200,
                     render : function(rowdata, rowindex, value) {
                         if(rowdata.type==1){
-                            return "Expert Medical Report"
+                            return "Expert Medical Opinion"
                         }else if(rowdata.type==2){
                             return "Personal Healthy Advisory";
                         }else if(rowdata.type==3){
                             return "Stress Management";
                         }else if(rowdata.type==4){
-                            return "Oientation And Navigation";
+                            return "Orientation and Navigation";
                         }else{
                             return ""
                         }
@@ -153,7 +153,7 @@
                         }else if(rowdata.status==4){
                             return "Completed";
                         }else if(rowdata.status==5){
-                            return "Followed";
+                            return "Follow up";
                         }else{
                             return "Pending"
                         }
@@ -162,7 +162,7 @@
                     display: 'Action',
                     isSort: false,
                     isExport: false,
-                    width: 200,
+                    width: 250,
                     align : 'left',
                     render: function (rowdata, rowindex, value)
                     {
@@ -388,7 +388,7 @@
     {
         var options = {
             columns: [
-                { display: 'id', name: 'id', width: 100 },
+//                { display: 'id', name: 'id', width: 100 },
                 { display: '名称', name: 'name', width: 100 }
             ], switchPageSizeApplyComboBox: false,
             url: "${ctx}/doctor/searchlist",
@@ -514,10 +514,10 @@
         <div class="l-panel-search-item">
             <select name="queryservicetype" id="queryservicetype" >
                 <option value="0">All</option>
-                <option value="1">Expert Medical Report</option>
+                <option value="1">Expert Medical Opinion</option>
                 <option value="2">Personal Healthy Advisory</option>
                 <option value="3">Stress Management</option>
-                <option value="4">Oientation And Navigation</option>
+                <option value="4">Orientation and Navigation</option>
             </select>
 
         </div>
@@ -529,7 +529,7 @@
                 <option value="2">Assigned</option>
                 <option value="3">Canceled</option>
                 <option value="4">Completeed</option>
-                <option value="5">Followed</option>
+                <option value="5">Follow up</option>
             </select>
         </div>
         <div class="l-panel-search-item">
