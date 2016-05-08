@@ -52,6 +52,7 @@ public class SentEmailUtils {
         mailInfo.setToAddress(toAddress);
         mailInfo.setSubject("Advance Medical Info");
         StringBuffer content = new StringBuffer();
+        content.append("<div style='font-family:arial'>");
         content.append("<p >Dear " + username + ":</p>");
         content.append("<p >We have received an online enrollment form from one of ");
         content.append(" our Chinese client employees through our patient portal.");
@@ -79,7 +80,7 @@ public class SentEmailUtils {
             content.append("女");
         }
         content.append("<br>");
-        content.append("申请人与患者关系").append(caseManage.getRelation());
+        content.append("申请人与患者关系：").append(caseManage.getRelation());
         content.append("<br>");
         content.append("申请人姓名：").append(caseManage.getCreatename());
         content.append("<br>");
@@ -97,9 +98,9 @@ public class SentEmailUtils {
         content.append("<br>");
         content.append("邮箱：").append(caseManage.getEmail());
         content.append("<br>");
-        content.append("联系时间").append(caseManage.getPhonetime());
+        content.append("联系时间：").append(caseManage.getPhonetime());
         content.append("<br>");
-        content.append("患者情况和需求").append(caseManage.getRemark());
+        content.append("患者情况和需求：<br><div style='margin-left:20px'>").append(caseManage.getRemark()).append("</div>");
         content.append("<br>");
         content.append("医生姓名：").append(caseManage.getDoctor_name());
         content.append("<br>");
@@ -113,7 +114,7 @@ public class SentEmailUtils {
         content.append("Timothy Foggin, M.D.");
         content.append("<br>");
         content.append("Medical Director (Asia Pacific) | 国际医疗总监 advance | medical");
-
+        content.append("</div>");
         mailInfo.setContent(content.toString());
         SimpleMailSender sms = new SimpleMailSender();
         //   sms.sendTextMail(mailInfo);//发送文体格式
