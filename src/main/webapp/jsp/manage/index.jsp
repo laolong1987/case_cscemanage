@@ -80,7 +80,7 @@
       var data = [];
       data.push({id: 1, value: '${ctx}/case/showlist', text: 'Cases'});
       <c:if test="${user.role !=4}">
-      data.push({id: 3, value: '${ctx}/doctor/showlist', text: 'Manages'});
+      data.push({id: 3, value: '${ctx}/doctor/showlist', text: 'Managers'});
       data.push({id: 4, value: '${ctx}/patient/showlist', text: 'Customers'});
       </c:if>
       var tree = $("#tree").ligerTree({
@@ -595,14 +595,26 @@
     </div>
     <div class="name">Service Admin Plaform</div>
 
-    <div class="loginbox">
-      <img src="../images/changepassword.png"
-           onmouseover="this.style.cursor='pointer'" onclick="openPwd();"
-           title="修改密码">&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="${ctx}/admin/logout">
-        <img src="../images/logout.png"
-             onmouseover="this.style.cursor='pointer'" title="注销"/>
-      </a>
+    <div class="loginbox" style="color: #4a4a4a;font: 16px Microsoft Yahei;right: 30px;position: absolute;top: 44px;">
+      <div
+        style="text-align: center;float: left;font-weight: bold">
+        <a href="javascript:openPwd()">
+          password
+        </a>
+      </div>
+      <div  style="text-align: center;float: left;margin: 0 10px" >
+        |
+      </div>
+      <!--
+      <img src="../images/changepassword.png" onmouseover="this.style.cursor='pointer'" onclick="" title="修改密码">&nbsp;&nbsp;&nbsp;&nbsp;
+      -->
+      <div
+        style="text-align: center;float: left;font-weight: bold;">
+        <a href="${ctx}/admin/logout">
+          <!--       <img src="../images/logout.png" onmouseover="this.style.cursor='pointer'" title="注销"/> -->
+          logout
+        </a>
+      </div>
 
 
     </div>
@@ -612,7 +624,7 @@
     </div>
      -->
     <div
-      style=" color: #4a4a4a;font: 16px Microsoft Yahei;right: 120px;position: absolute;top: 45px;">
+      style=" color: #4a4a4a;font-size:16px;right: 220px;position: absolute;top: 45px;">
       你好,${user.name}</div>
     <div class="weizhi"></div>
   </div>
